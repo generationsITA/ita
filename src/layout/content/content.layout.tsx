@@ -8,7 +8,7 @@ import HomePage from "../../pages/home-page/home.page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 import Auth from "../../components/Auth/auth.component";
 
-import Todo from "../../components/Todo/Todo";
+import Todo from "../../components/Todo";
 
 const StyledContentWrapper = styled.div`
   width: 100%;

@@ -1,6 +1,5 @@
 import React from 'react';
-import '../../../app.css';
-// import styled from 'styled-components';
+import '../todo.css';
 import Button from '@material-ui/core/Button';
 
 interface Props {
