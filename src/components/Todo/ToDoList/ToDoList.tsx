@@ -1,8 +1,7 @@
 import React from 'react';
-import '../../app.css';
-import styled from 'styled-components';
 import TodoListItem from '../ToDoListItem/ToDoListItem';
-import { TodoItem } from '../../types/types';
+import { TodoItem } from '../types/types';
+import { TodoListWrapper, TodosList } from './StyledToDoList';
 
 interface Props {
   tasks: Array<TodoItem>;
@@ -11,12 +10,7 @@ interface Props {
   showedItems: string;
 }
 
-const TodoList: React.FC<Props> = ({
-  tasks,
-  deleteTodo,
-  changeStatus,
-  showedItems
-}) => {
+const TodoList: React.FC<Props> = ({tasks, showedItems, deleteTodo, changeStatus}) => {
   const listItems = tasks.filter(el => {
     if (showedItems === 'all') {
       return true;
@@ -56,31 +50,3 @@ const TodoList: React.FC<Props> = ({
 };
 
 export default TodoList;
-
-const TodosList = styled.ul`
-  margin: 0;
-  padding: 0;
-  height: 400px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  ::-webkit-scrollbar {
-    padding-left: 40px;
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 3px grey;
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #24c3f9;
-    border-radius: 10px;
-  }
-`;
-
-const TodoListWrapper = styled.div`
-  .list-heading {
-    text-align: center;
-  }
-`;

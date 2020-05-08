@@ -5,22 +5,11 @@ import "./styles/index.css";
 
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import rootReducer from "./store/root.reducer";
 import { ThemeProvider, StylesProvider } from "@material-ui/core/styles";
 import { theme } from "./index.style";
-import { createStore, applyMiddleware } from "redux";
-import thunkMiddleware from "redux-thunk";
 import "./styles/index.css";
-import createSagaMiddleware from "redux-saga";
-import rootSaga from "./store/root.saga";
 import { GlobalCSS } from "./index.style";
-
-
-
-const sagaMiddleware = createSagaMiddleware();
-const middleware = [sagaMiddleware, thunkMiddleware];
-const store = createStore(rootReducer, applyMiddleware(...middleware));
-sagaMiddleware.run(rootSaga);
+import { store } from './store/store';
 
 ReactDOM.render(
   <Provider store={store}>

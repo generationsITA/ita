@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
+import { Form } from './StyledTodoAddForm';
 
-import styled from 'styled-components';
 interface Props {
   addTodo: (text: string) => void;
 }
@@ -38,8 +38,3 @@ const ToDoAddForm: React.FC<Props> = ({ addTodo }) => {
 };
 
 export default ToDoAddForm;
-
-const Form = styled.form`
-  /* display: fixed;
-  top: 20px; */
-`;

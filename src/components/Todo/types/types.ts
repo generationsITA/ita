@@ -3,3 +3,8 @@ export interface TodoItem {
   done: boolean;
   id: number;
 }
+
+export interface State {
+  tasks: TodoItem[];
+  showedItems: string;
+}

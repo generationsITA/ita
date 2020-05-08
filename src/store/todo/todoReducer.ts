@@ -1,14 +1,13 @@
+import { TodoItem, State } from '../../components/Todo/types/types'
 import {
-  ActionTypes,
   ADD_TODO,
   CHANGE_STATUS,
   DELETE_TODO,
   SHOW_ALL_ITEMS,
   SHOW_COMPLETED_ITEMS,
   SHOW_ACTIVE_ITEMS
-} from '../../components/Todo/types/redux/actionsTypes';
-import { State } from '../../components/Todo/types/redux/reducerTypes';
-import { TodoItem } from '../../components/Todo/types/types';
+} from './todoConstants';
+import { ActionTypes } from './todoActions'
 
 export const initialState: State = {
   tasks: [],

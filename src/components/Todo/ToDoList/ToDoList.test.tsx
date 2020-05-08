@@ -3,7 +3,7 @@ import TodoList from "./ToDoList";
 import { render, fireEvent, cleanup } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
-import { deleteTodo, changeStatus } from "../../../../store/todo/actions";
+import { deleteTodo, changeStatus } from "../../../store/todo/todoActions";
 
 afterEach(cleanup);
 
