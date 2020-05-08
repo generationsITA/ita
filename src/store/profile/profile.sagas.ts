@@ -14,13 +14,13 @@ function* getProfileDataAsync() {
     const dataRef = db.collection("users").doc(Cookies.get("uid"));
     const data = yield dataRef.get();
     const userData = yield call(getData, data);
-    const userAvatarUrl = yield getFile(
-      getFileTypes.avatar.path,
-      getFileTypes.avatar.name,
-      Cookies.get("uid") || ""
-    );
+    const userAvatarUrl = yield call( 
+    getFile, 
+    getFileTypes.avatar.path, 
+    getFileTypes.avatar.name, 
+    Cookies.get("uid") || "")
 
-    yield put(saveProfileData({ ...userData, userAvatarUrl }));
+    yield put(saveProfileData({...userData, userAvatarUrl}));
   } catch (err) {}
 }
 

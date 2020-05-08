@@ -1,4 +1,4 @@
-const firebase = require("firebase/firebase");
+export const firebase = require("firebase/firebase");
 //Required for side-effects
 require("firebase/firestore");
 
@@ -21,3 +21,5 @@ export const Firebase = firebase.initializeApp(firebaseConfig);
 
 export const db = Firebase.firestore();
 export const auth = firebase.auth();
+
+

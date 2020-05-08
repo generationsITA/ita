@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import { firebase } from '../../firebase/firebase.config';
 import Img from '../../assets/images/ava.jpg';
 
 export const getFileTypes = {
@@ -14,11 +14,12 @@ export const getFile = (path: string, name: string, uid: string) => {
     .ref(`${path}/${name}-${uid}`)
     .getDownloadURL()
     .then((url: string) => {
-      console.log(url);
+      console.log(url)
       return url;
     })
     .catch(() => Img);
 };
+
 
 export const putFile = (file: any, path: string, name: string, uid: string) => {
   const metadata = {
