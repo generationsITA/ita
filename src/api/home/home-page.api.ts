@@ -1,8 +1,8 @@
-import { db } from '../../firebase/firebase.config';
+import { db } from "@firebaseConfig/firebase.config";
 
 export async function getTilesData() {
   const tiles = await db
-    .collection('tools')
+    .collection("tools")
     .get()
     .then((querySnapshot: any) => {
       const tmpTile: any = [];

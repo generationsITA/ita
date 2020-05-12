@@ -5,12 +5,12 @@ import {
   ProfileAvatarImage,
   ProfileSwipeButton,
   ProfileTitleName,
-  ProfileTitleGroup
-} from "../../pages/profile-page/profile-page.styled";
+  ProfileTitleGroup,
+} from "@pages/profile-page/profile-page.styled";
 import { connect } from "react-redux";
-import { changeProfileSummaryWindow } from "../../store/profile/profile.actions";
-import { signOutUser } from "../../store/auth/auth.actions";
-import Img from "../../assets/images/ava.jpg";
+import { changeProfileSummaryWindow } from "@store/profile/profile.actions";
+import { signOutUser } from "@store/auth/auth.actions";
+import Img from "@assets/images/ava.jpg";
 
 interface Props {
   name: string;
@@ -21,14 +21,14 @@ interface Props {
   signout: () => void;
 }
 
-const ProfileAvatar: React.FC<Props> = props => {
+const ProfileAvatar: React.FC<Props> = (props) => {
   const {
     url,
     name,
     group,
     changeProfileSummaryWindow,
     windowStatus,
-    signout
+    signout,
   } = props;
 
   return (
@@ -48,11 +48,11 @@ const ProfileAvatar: React.FC<Props> = props => {
 
 const mapDispatchToProps = (dispatch: any) => ({
   changeProfileSummaryWindow: () => dispatch(changeProfileSummaryWindow()),
-  signout: () => dispatch(signOutUser())
+  signout: () => dispatch(signOutUser()),
 });
 
 const mapStateToProps = (state: any) => ({
-  windowStatus: state.profileReducer.windowStatus
+  windowStatus: state.profileReducer.windowStatus,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileAvatar);

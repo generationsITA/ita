@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 import {
   FileResultContainer,
   UploadFileContainer,
   FileContainer,
   FileResultImg,
   UploadFileInputContainer,
-  UploadFileTitle
-} from './file-upload.styled';
-import Img from '../../assets/images/ava.jpg';
+  UploadFileTitle,
+} from "./file-upload.styled";
+import Img from "@assets/images/ava.jpg";
 
 const initialFile = {
   file: null,
-  fileUrl: Img
+  fileUrl: Img,
 };
 
 interface Props {
@@ -27,7 +27,7 @@ const FileUpload: React.FC<Props> = ({ putFile }) => {
     reader.onload = function(event: any) {
       setFile({
         file: file,
-        fileUrl: event.target.result
+        fileUrl: event.target.result,
       });
     };
 
