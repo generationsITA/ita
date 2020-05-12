@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactElement } from 'react';
 import NavigationMenu from './NavigationMenuList/NavigationMenuList';
-import Chat from '../Chat/Chat';
+import Chat from '../Chat';
 import { StyledContainer, StyledMenuContainer } from './MenuContainerStyles';
 import { ItemsInterface } from './types/types';
 import { Route, Switch } from 'react-router-dom';
