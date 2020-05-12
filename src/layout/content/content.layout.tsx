@@ -1,14 +1,14 @@
 import React from "react";
 import { Switch, Route } from "react-router";
-import Randomizer from "../../components/Randomizer/Randomizer";
+import Randomizer from "@components/Randomizer/Randomizer";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import ProtectedRoute from "../../HOC/protected-route/protected-route.hoc";
-import HomePage from "../../pages/home-page/home.page";
-import ProfilePage from "../../pages/profile-page/profile-page";
-import Auth from "../../components/Auth/auth.component";
+import ProtectedRoute from "@HOC/protected-route/protected-route.hoc";
+import HomePage from "@pages/home-page/home.page";
+import ProfilePage from "@pages/profile-page/profile-page";
+import Auth from "@components/Auth/auth.component";
 
-import Todo from "../../components/Todo";
+import Todo from "@components/Todo";
 
 const StyledContentWrapper = styled.div`
   width: 100%;

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Tiles from '../../components/Tiles/Tiles';
-import { getTilesData } from '../../api/home/home-page.api';
-import { StyledTitle, StyledTitleH1 } from './home-page.styled';
+import React, { useEffect, useState } from "react";
+import Tiles from "@components/Tiles/Tiles";
+import { getTilesData } from "@api/home/home-page.api";
+import { StyledTitle, StyledTitleH1 } from "./home-page.styled";
 
 const HomePage = () => {
   const [tiles, setTiles] = useState([]);

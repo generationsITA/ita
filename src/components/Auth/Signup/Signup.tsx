@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { authSignup } from "../../../store/auth/auth.actions";
+import { authSignup } from "@store/auth/auth.actions";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import { SignupInterface } from "./SignupInterface";
 import { Form } from "react-final-form";
-import InputValidate from "../../../HOC/input-validation/input-validation.hoc";
+import InputValidate from "@HOC/input-validation/input-validation.hoc";
 import {
   required,
   email,
   password,
-  composeValidators
+  composeValidators,
 } from "../../../utils/validation.utils";
 import FileUpload from "../../file-upload/file-upload";
 
@@ -29,10 +29,10 @@ const initialValues = {
   password: "",
   confirmPassword: "",
   name: "",
-  group: ""
+  group: "",
 };
 
-const Signup: React.FC<Props> = props => {
+const Signup: React.FC<Props> = (props) => {
   const [avatar, setAvatar] = useState();
 
   const { authSignup } = props;
@@ -43,7 +43,7 @@ const Signup: React.FC<Props> = props => {
       password: form.password,
       name: form.name,
       group: form.group,
-      file: avatar
+      file: avatar,
     };
     authSignup(userData);
   };
@@ -57,11 +57,11 @@ const Signup: React.FC<Props> = props => {
     <div>
       <FileUpload putFile={handleFile} />
       <Form
-        onSubmit={formObj => {
+        onSubmit={(formObj) => {
           onSubmitForm(formObj);
         }}
         initialValues={initialValues}
-        validate={values => {
+        validate={(values) => {
           const errors: any = {};
           if (values.confirmPassword !== values.password) {
             errors.confirmPassword = "Passwords must match!";
@@ -70,7 +70,7 @@ const Signup: React.FC<Props> = props => {
         }}
         render={({ handleSubmit }) => (
           <SignupForm
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();
             }}

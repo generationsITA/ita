@@ -5,18 +5,18 @@ import {
   ProfileSummaryItem,
   ProfileSummaryInnerItem,
   ProfileEditContainer,
-  ProfileEditForm
-} from "../../pages/profile-page/profile-page.styled";
+  ProfileEditForm,
+} from "@pages/profile-page/profile-page.styled";
 import { Form } from "react-final-form";
-import InputValidate from "../../HOC/input-validation/input-validation.hoc";
+import InputValidate from "@HOC/input-validation/input-validation.hoc";
 import { Button } from "@material-ui/core";
 import ProfileInfoInterface from "./profile-info.interface";
 import { connect } from "react-redux";
-import { db, collectionTypes } from "../../firebase/firebase.config";
-import { getProfileData } from "../../store/profile/profile.actions";
+import { db, collectionTypes } from "@firebaseConfig/firebase.config";
+import { getProfileData } from "@store/profile/profile.actions";
 import FileUpload from "../file-upload/file-upload";
-import { putFile, getFileTypes } from "../../api/profile/ProfileApi";
-import { composeValidators } from "../../utils/validation.utils";
+import { putFile, getFileTypes } from "@api/profile/ProfileApi";
+import { composeValidators } from "@utils/validation.utils";
 
 interface Props {
   profileData: ProfileInfoInterface;
@@ -25,7 +25,7 @@ interface Props {
   getData: () => void;
 }
 
-const ProfileInfo: React.FC<Props> = props => {
+const ProfileInfo: React.FC<Props> = (props) => {
   const [avatar, setAvatar] = useState(null);
 
   const { profileData, windowStatus, uid, getData } = props;
@@ -86,7 +86,7 @@ const ProfileInfo: React.FC<Props> = props => {
   const profileEdit = (
     <ProfileEditContainer>
       <Form
-        onSubmit={formObj => {
+        onSubmit={(formObj) => {
           updateData(formObj);
         }}
         render={({ handleSubmit }: any) => (
@@ -134,11 +134,11 @@ const ProfileInfo: React.FC<Props> = props => {
 
 const mapStateToProps = (state: any) => ({
   windowStatus: state.profileReducer.windowStatus,
-  uid: state.authReducer.uid
+  uid: state.authReducer.uid,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getData: () => dispatch(getProfileData())
+  getData: () => dispatch(getProfileData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);

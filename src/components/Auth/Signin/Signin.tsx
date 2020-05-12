@@ -1,15 +1,20 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { Form } from 'react-final-form';
-import { SigninInterface } from './Interfaces/SignInInterface';
-import { signInUser, signOutUser } from '../../../store/auth/auth.actions';
-import { connect } from 'react-redux';
-import { UserForm } from '@components/Auth/Signin/Interfaces/UserFormInterface';
-import InputValidate from '../../../HOC/input-validation/input-validation.hoc';
-import { required, email, password, composeValidators } from '../../../utils/validation.utils';
-import { Button } from '@material-ui/core';
-import styled from 'styled-components';
-import { InitialStateInterface } from 'store/store-interfaces/initial-state.Interface';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { Form } from "react-final-form";
+import { SigninInterface } from "./Interfaces/SignInInterface";
+import { signInUser, signOutUser } from "@store/auth/auth.actions";
+import { connect } from "react-redux";
+import { UserForm } from "@components/Auth/Signin/Interfaces/UserFormInterface";
+import InputValidate from "@HOC/input-validation/input-validation.hoc";
+import {
+  required,
+  email,
+  password,
+  composeValidators,
+} from "../../../utils/validation.utils";
+import { Button } from "@material-ui/core";
+import styled from "styled-components";
+import { InitialStateInterface } from "@store/store-interfaces/initial-state.Interface";
 
 const SigninForm = styled.form`
   width: 480px;
@@ -18,8 +23,8 @@ const SigninForm = styled.form`
 `;
 
 const initialValues: UserForm = {
-  email: '',
-  password: ''
+  email: "",
+  password: "",
 };
 
 const SignIn = ({ error, signInUser }: SigninInterface) => {
@@ -29,13 +34,13 @@ const SignIn = ({ error, signInUser }: SigninInterface) => {
 
   return (
     <Form
-      onSubmit={formObj => {
+      onSubmit={(formObj) => {
         handleFormSubmit(formObj);
       }}
       validate={() => {
         const errors: any = {};
         if (error) {
-          errors.password = 'Invalid email or password';
+          errors.password = "Invalid email or password";
         }
         return errors;
       }}
@@ -83,7 +88,7 @@ const mapDispatchToProps = (dispatch: any) => {
 
 const mapStateToProps = (state: InitialStateInterface) => {
   return {
-    error: state.authReducer.error
+    error: state.authReducer.error,
   };
 };
 
