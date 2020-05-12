@@ -1,9 +1,9 @@
 import {
   SignupInterface,
-  SignupFullDataInterface
-} from '@components/Auth/Signup/SignupInterface';
-import { auth, db } from '../../firebase/firebase.config';
-import { signInUser } from '../../store/auth/auth.actions';
+  SignupFullDataInterface,
+} from "@components/Auth/Signup/SignupInterface";
+import { auth, db } from "@firebaseConfig/firebase.config";
+import { signInUser } from "@store/auth/auth.actions";
 
 export const authSignup = (userData: SignupInterface) => {
   return auth
@@ -19,7 +19,7 @@ export const authSignupFullData = (fullUserData: SignupFullDataInterface) => {
   const time = new Date().getTime();
   const threeMonth = 3 * 30 * 24 * 60 * 60 * 1000;
   return db
-    .collection('users')
+    .collection("users")
     .doc(fullUserData.uid)
     .set({
       email: fullUserData.email,
@@ -29,12 +29,12 @@ export const authSignupFullData = (fullUserData: SignupFullDataInterface) => {
         startDate: new Date(time),
         startTime: time,
         endDate: new Date(time + threeMonth),
-        endTime: time + threeMonth
+        endTime: time + threeMonth,
       },
       tasks: {
         resolvedTasks: 0,
-        failedTasks: 0
-      }
+        failedTasks: 0,
+      },
     })
     .then(() => true)
     .catch(() => false);

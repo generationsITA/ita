@@ -4,13 +4,13 @@ import {
   ProfileContainer,
   ProfileAvatarContainer,
   ProfileProgressContainer,
-  ProfileTitleContainer
+  ProfileTitleContainer,
 } from "./profile-page.styled";
-import { getProfileData } from "../../store/profile/profile.actions";
+import { getProfileData } from "@store/profile/profile.actions";
 import { connect } from "react-redux";
-import ProfileInfo from "../../components/profile-info/profile-info";
-import ProfileAvatar from "../../components/profile-avatar/profile-avatar";
-import Chart from "../../components/chart/chart";
+import ProfileInfo from "@components/profile-info/profile-info";
+import ProfileAvatar from "@components/profile-avatar/profile-avatar";
+import Chart from "@components/chart/chart";
 
 interface Props {
   getData: () => void;
@@ -47,11 +47,11 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
 };
 
 const mapStateToProps = (state: any) => ({
-  profileData: state.profileReducer.profileData
+  profileData: state.profileReducer.profileData,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getData: () => dispatch(getProfileData())
+  getData: () => dispatch(getProfileData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

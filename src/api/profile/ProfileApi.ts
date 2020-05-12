@@ -1,11 +1,11 @@
-import { firebase } from '../../firebase/firebase.config';
-import Img from '../../assets/images/ava.jpg';
+import { firebase } from "@firebaseConfig/firebase.config";
+import Img from "@assets/images/ava.jpg";
 
 export const getFileTypes = {
   avatar: {
-    path: 'avatars',
-    name: 'avatar'
-  }
+    path: "avatars",
+    name: "avatar",
+  },
 };
 
 export const getFile = (path: string, name: string, uid: string) => {
@@ -14,16 +14,15 @@ export const getFile = (path: string, name: string, uid: string) => {
     .ref(`${path}/${name}-${uid}`)
     .getDownloadURL()
     .then((url: string) => {
-      console.log(url)
+      console.log(url);
       return url;
     })
     .catch(() => Img);
 };
 
-
 export const putFile = (file: any, path: string, name: string, uid: string) => {
   const metadata = {
-    contentType: 'image/*'
+    contentType: "image/*",
   };
 
   const putName: string = `${name}-${uid}`;
