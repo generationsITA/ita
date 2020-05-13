@@ -5,7 +5,7 @@ import './ChatHeader.css';
 const ChatHeader = () => {
     return (
         <div className='chat-header'>
-            <p>General</p>
+            <h3>General</h3>
         </div>
     );
 };

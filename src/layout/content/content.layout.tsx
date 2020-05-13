@@ -9,6 +9,7 @@ import ProfilePage from "@pages/profile-page/profile-page";
 import Auth from "@components/Auth/auth.component";
 
 import Todo from "@components/Todo";
+import Chat from "@components/Chat";
 
 const StyledContentWrapper = styled.div`
   width: 100%;
@@ -29,6 +30,7 @@ const ContentWrapper = (props: any) => {
         </ProtectedRoute>
         <Route path="/tools/random" component={Randomizer} />
         <Route path="/tools/todo" component={Todo} />
+        <Route path="/tools/chat" component={Chat} />
         <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
         </ProtectedRoute>

@@ -7,13 +7,13 @@ interface Props {
 }
 const MessageList = (props: Props) => {
     return (
-        <Fragment>
+        <div className='message-list'>
             {props.messages.map(message => {
                 return (
                     <Message message={message} />
                 )
             })}
-        </Fragment>
+        </div>
     );
 };
 

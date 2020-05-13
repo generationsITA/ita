@@ -39,6 +39,11 @@ const menuItems: ItemsInterface[] = [
         name: 'todo',
         icon: 'far fa-list-alt',
         path: '/todo'
+      },
+      {
+        name: 'chat',
+        icon: 'far fa-list-alt',
+        path: '/chat'
       }
     ]
   }
@@ -84,7 +89,7 @@ const MenuContainer = () => {
     <StyledMenuContainer data-testid="menu-container">
       <StyledContainer>
         <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
-        <Chat />
+        {/* <Chat /> */}
       </StyledContainer>
       {nestedMenuContent ? (
         <StyledContainer>{nestedMenuContent}</StyledContainer>
