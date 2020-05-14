@@ -23,14 +23,17 @@ interface Props {
 }
 
 interface State {
-  message: RequestMessage,
+  message: ResponseMessage,
   messages: ResponseMessage[]
 }
 
 class Chat extends Component<Props, State> {
 
   state: State = {
-    message: { text: '' },
+    message: { 
+      name: '',
+      text: '' 
+    },
     messages: []
   }
 
@@ -48,17 +51,26 @@ class Chat extends Component<Props, State> {
     });
   }
 
+  componentWillUnmount() {
+    socket.emit('disconnect')
+  }
+
   setMessage = (message: string) => {
     this.setState({
       ...this.state,
       message: {
         ...this.state.message,
+        name: this.props.chatAuth.name,
         text: message
       }
     })
   }
 
   sendMessage = () => {
+    this.setState({
+      messages: [...this.state.messages, this.state.message]
+    })
+
     if (this.state.message.text) {
       socket.emit('sendMessage', this.state.message, () => this.setState({
         ...this.state,
@@ -71,7 +83,6 @@ class Chat extends Component<Props, State> {
   }
 
   render() {
-console.log(this.state)
 
 const { messages, message } = this.state;
 
@@ -79,7 +90,7 @@ const { messages, message } = this.state;
       <div className='chat'>
         <ChatHeader />
         <div className='message-list'>
-          <MessageList messages={messages} />
+          <MessageList messages={messages} authName={this.props.chatAuth.name}/>
         </div>
         <AddMessage
         text={message.text}

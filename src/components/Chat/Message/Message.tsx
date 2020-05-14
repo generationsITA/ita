@@ -1,34 +1,34 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './Message.css';
+import { ResponseMessage } from '..';
+import Outgoing from './Outgoing/Outgoing';
+import Incoming from './Incoming/Incoming';
 
 interface Props {
-    message: string
+    message: ResponseMessage,
+    authName: string
 }
-
-const user = true
 
 const Message = (props: Props) => {
 
+  let isSentByCurrentUser = false;
+  const trimmedName = props.authName.trim().toLowerCase();
+
+  if(props.message.name === trimmedName) {
+    isSentByCurrentUser = true;
+  }
+
+  const {name, text} = props.message;
     return (
-        user
-      ? (
-        <div className='message-container justify-end'>
-          <div className='message-box background-outgoing'>
-            <p className='message-text color-white'>
-                {props.message}
-            </p>
-          </div>
-        </div>
-        )
-        : (
-          <div className='message-container justify-start'>
-            <div className='message-box background-incoming'>
-              <p className='message-text color-dark'>
-                  {props.message}
-            </p>
-            </div>
-          </div>
-        )
+         isSentByCurrentUser ? (
+                <div className='outgoing'>
+                  <Outgoing name={name} text={text}/>
+                </div>
+                ) : (
+                  <div className='incoming'>
+                    <Incoming name={name} text={text} />
+                  </div>
+                )
     );
 };
 
