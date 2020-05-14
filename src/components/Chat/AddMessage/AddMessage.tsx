@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import './AddMessage.css';
 
 const AddMessage = () => {
-    const [ message, setMessage ] = useState('')
+    const [message, setMessage] = useState('')
 
     const handleInput = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setMessage(event.target.value)
@@ -14,11 +14,11 @@ const AddMessage = () => {
         event.preventDefault();
         console.log(message)
     }
-        return (
-            <div className='add-message-bar'>
-                <form className='add-message-form' onSubmit={handleAddMessage}>
+    return (
+        <div className='add-message-bar'>
+            <form className='add-message-form' onSubmit={handleAddMessage}>
 
-                    <TextField
+                <TextField
                     label='Type a message...'
                     variant='outlined'
                     type='text'
@@ -28,7 +28,7 @@ const AddMessage = () => {
                     data-testid='add-message-input'
                     required
                 />
-                
+
                 <Button
                     className="submit"
                     variant="contained"
@@ -37,10 +37,10 @@ const AddMessage = () => {
                 >
                     Send
                 </Button>
-                </form>
-                
-            </div>
-        );
+            </form>
+
+        </div>
+    );
 };
 
 export default AddMessage;
