@@ -23,7 +23,7 @@ const Join = () => {
          {/* <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
           <button className={'button mt-20'} type="submit">Sign In</button>
         </Link> */}
-        <Link onClick={e => (!name) ? e.preventDefault() : null} to={`/tools/chat?room=${room}`}>
+        <Link onClick={e => (!name) ? e.preventDefault() : null} to={`/tools/chat/${name}/${room}`}>
           <button type="submit">Sign In</button>
         </Link>
       </div>
