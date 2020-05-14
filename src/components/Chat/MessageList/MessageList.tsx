@@ -1,16 +1,17 @@
 import React, { Fragment } from 'react';
 import './MessageList.css';
 import Message from '../Message/Message';
+import { ResponseMessage } from '..';
 
 interface Props {
-    messages: string[]
+    messages: ResponseMessage[]
 }
 const MessageList = (props: Props) => {
     return (
         <div className='message-list'>
             {props.messages.map(message => {
                 return (
-                    <Message message={message} />
+                    <Message message={message.text} />
                 )
             })}
         </div>

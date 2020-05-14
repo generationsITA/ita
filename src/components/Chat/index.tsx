@@ -1,11 +1,10 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { Component } from 'react';
 import './Chat.css';
-// import queryString from 'query-string'; // should be deleted
 import ChatHeader from './ChatHeader/ChatHeader';
 import MessageList from './MessageList/MessageList';
 import AddMessage from './AddMessage/AddMessage';
 import io from 'socket.io-client';
-// import { useLocation } from 'react-router-dom';
+import { chatAuth } from './Join/Join';
 
 let socket: SocketIOClient.Socket;
 
@@ -14,13 +13,13 @@ interface RequestMessage {
   text: string
 }
 
-interface ResponseMessage {
+export interface ResponseMessage {
   name: string,
   text: string
 }
 
 interface Props {
-  name: string
+  chatAuth: chatAuth
 }
 
 interface State {
@@ -31,64 +30,65 @@ interface State {
 class Chat extends Component<Props, State> {
 
   state: State = {
-    message: {text: ''},
+    message: { text: '' },
     messages: []
   }
 
   componentDidMount() {
     socket = io('localhost:5500');
-    socket.emit('join', this.props.name, (error: string) => {
-      if(error) {
+    socket.emit('join', this.props.chatAuth, (error: string) => {
+      if (error) {
         console.log(error)
       }
-    })
-    socket.on('message', ( message: ResponseMessage ) => {
+    });
+    socket.on('message', (message: ResponseMessage) => {
       this.setState({
-        messages: [ ...this.state.messages, message ]
+        messages: [...this.state.messages, message]
       })
     });
   }
 
-handleInput = (event: { target: { value: string; }; }) => {
-  this.setState({
-    ...this.state,
-    message: {
-      ...this.state.message,
-      text: event.target.value
-    }
-
-  })
-}
-
-sendMessage = (event: { preventDefault: () => void; }) => {
-  event.preventDefault();
-  if(this.state.message.text) {
-    socket.emit('sendMessage', this.state.message)
+  setMessage = (message: string) => {
+    this.setState({
+      ...this.state,
+      message: {
+        ...this.state.message,
+        text: message
+      }
+    })
   }
-}
 
-render () {
+  sendMessage = () => {
+    if (this.state.message.text) {
+      socket.emit('sendMessage', this.state.message, () => this.setState({
+        ...this.state,
+        message: {
+          ...this.state.message,
+          text: ''
+        }
+      }))
+    }
+  }
 
-  console.log(this.state)
-  
-  return (
-    <div className='chat'>
-      <ChatHeader />
-      <div className='message-list'>
-        {/* <MessageList messages={this.state.messages} /> */}
+  render() {
+console.log(this.state)
+
+const { messages, message } = this.state;
+
+    return (
+      <div className='chat'>
+        <ChatHeader />
+        <div className='message-list'>
+          <MessageList messages={messages} />
+        </div>
+        <AddMessage
+        text={message.text}
+        setMessage={this.setMessage}
+        sendMessage={this.sendMessage} />
       </div>
-      <input type='text' value={this.state.message.text} 
-      onChange={this.handleInput} 
-      />
-      <button onClick={this.sendMessage}>Send</button>
-      {/* <AddMessage
-        // handleAddMessage={handleAddMessage}
-        message={message}
-        setMessage={setMessage} /> */}
-    </div>
-  );
-}
-  
+    );
+  }
+
 };
 
 export default Chat;
