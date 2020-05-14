@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
+import Chat from '../index';
 
 const Join = () => {
     const [ name, setName ] = useState('');
@@ -26,6 +27,8 @@ const Join = () => {
         <Link onClick={e => (!name) ? e.preventDefault() : null} to={`/tools/chat/${name}/${room}`}>
           <button type="submit">Sign In</button>
         </Link>
+
+        <Chat />
       </div>
     </div>
     );

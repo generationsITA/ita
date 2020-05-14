@@ -32,7 +32,7 @@ const ContentWrapper = (props: {id: string}) => {
         <Route path="/tools/random" component={Randomizer} />
         <Route path="/tools/todo" component={Todo} />
         <Route path="/tools/join" component={Join} />
-        <Route path="/tools/chat/:name/:room" component={Chat}/>
+        {/* <Route path="/tools/chat/:name/:room" component={Chat}/> */}
         <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
         </ProtectedRoute>
