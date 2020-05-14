@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Chat.css';
-// import queryString from 'query-string';
+//import queryString from 'query-string';
 import ChatHeader from './ChatHeader/ChatHeader';
 import MessageList from './MessageList/MessageList';
 import AddMessage from './AddMessage/AddMessage';
@@ -45,7 +45,6 @@ const Chat = () => {
     setMessages([...list, message]);
     setMessage('');
   }
-
 
   return (
     <div className='chat'>
