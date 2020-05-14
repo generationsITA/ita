@@ -14,7 +14,7 @@ const ENDPOINT = 'localhost:5500';
 const Chat = () => {
 
   const [name, setName] = useState('username');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(list);
   const [message, setMessage] = useState('');
   const socket = io(ENDPOINT);
 
@@ -32,7 +32,7 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on('message', () => {
-
+      setMessages([...list, message])
     })
   }, [message]);
 
