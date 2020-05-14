@@ -23,16 +23,12 @@ interface ResponseMessage {
   text: string
 }
 
-const Chat = (props: {location: string} ) => {
+interface Props {
+  name: string
+}
 
-  // console.log(props.location.search)
+const Chat = (props: Props) => {
 
-  const params: any = useParams();
-  const joinName = params.name
-  const joinRoom = params.room
-
-  const [name, setName] = useState('dima');
-  const [room, setRoom] = useState('general');
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState(['']);
@@ -42,10 +38,8 @@ const Chat = (props: {location: string} ) => {
 
   useEffect(() => {
     socket = io(ENDPOINT);
-    setRoom(joinRoom);
-    setName(joinName);
 
-    socket.emit('join', { name }, () => {
+    socket.emit('join', props.name, () => {
 
     })
 
@@ -55,7 +49,8 @@ const Chat = (props: {location: string} ) => {
     //   // socket.off();
     // }
 
-  }, [ENDPOINT, props.location.search]);
+  // }, [ENDPOINT, props.location.search]);
+}, [ENDPOINT]);
 
   useEffect(() => {
     socket.on('message', ( message: ResponseMessage ) => {

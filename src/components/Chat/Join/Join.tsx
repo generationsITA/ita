@@ -4,34 +4,39 @@ import Chat from '../index';
 
 const Join = () => {
     const [ name, setName ] = useState('');
+    const [ input, setInput ] = useState('');
+
     const [ room, setRoom ] = useState('general');
 
+
+
+
+    const joinForm = () => {
+      return (
+        <div className="join-container">
+            <div className="join-inner">
+                  <h1 className="heading">Join</h1>
+                  <div>
+                  <input 
+                    placeholder="Name" 
+                    className="join-input" 
+                    type="text" 
+                    value={input}
+                    onChange={(event) => setInput(event.target.value)} />
+                </div>
+                  <button type="submit" onClick={(event) => {setName(input)}}>Sign In</button>
+
+              </div>
+            </div>
+      )
+    }
     
     return (
-        <div className="join-container">
-      <div className="join-inner">
-        <h1 className="heading">Join</h1>
-        <div>
-          <input 
-            placeholder="Name" 
-            className="join-input" 
-            type="text" 
-            onChange={(event) => setName(event.target.value)} />
-        </div>
-        {/* <div>
-          <input placeholder="Room" className="joinInput mt-20" type="text" onChange={(event) => setRoom(event.target.value)} />
-        </div> */}
-         {/* <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
-          <button className={'button mt-20'} type="submit">Sign In</button>
-        </Link> */}
-        <Link onClick={e => (!name) ? e.preventDefault() : null} to={`/tools/chat/${name}/${room}`}>
-          <button type="submit">Sign In</button>
-        </Link>
-
-        <Chat />
+      <div>
+          { name ? <Chat name={name} /> : joinForm() }
       </div>
-    </div>
-    );
+        
+    )
 };
 
 export default Join;
