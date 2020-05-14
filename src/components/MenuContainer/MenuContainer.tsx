@@ -41,9 +41,9 @@ const menuItems: ItemsInterface[] = [
         path: '/todo'
       },
       {
-        name: 'chat',
-        icon: 'far fa-list-alt',
-        path: '/chat'
+        name: 'join',
+        icon: 'fa fa-comments-o',
+        path: '/join'
       }
     ]
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Chat.css';
+// import queryString from 'query-string';
 import ChatHeader from './ChatHeader/ChatHeader';
 import MessageList from './MessageList/MessageList';
 import AddMessage from './AddMessage/AddMessage';
