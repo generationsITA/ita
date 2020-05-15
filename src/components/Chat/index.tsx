@@ -30,15 +30,15 @@ interface State {
 class Chat extends Component<Props, State> {
 
   state: State = {
-    message: { 
+    message: {
       name: '',
-      text: '' 
+      text: ''
     },
     messages: []
   }
 
   componentDidMount() {
-    socket = io('localhost:5500');
+    socket = io('https://ita-chat-app.herokuapp.com/');
     socket.emit('join', this.props.chatAuth, (error: string) => {
       if (error) {
         console.log(error)
@@ -84,18 +84,18 @@ class Chat extends Component<Props, State> {
 
   render() {
 
-const { messages, message } = this.state;
+    const { messages, message } = this.state;
 
     return (
       <div className='chat'>
         <ChatHeader />
         <div className='message-list'>
-          <MessageList messages={messages} authName={this.props.chatAuth.name}/>
+          <MessageList messages={messages} authName={this.props.chatAuth.name} />
         </div>
         <AddMessage
-        text={message.text}
-        setMessage={this.setMessage}
-        sendMessage={this.sendMessage} />
+          text={message.text}
+          setMessage={this.setMessage}
+          sendMessage={this.sendMessage} />
       </div>
     );
   }
