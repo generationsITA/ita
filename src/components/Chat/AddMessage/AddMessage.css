@@ -1,0 +1,11 @@
+.add-message-bar {
+    padding: 2rem 0;
+    width: 100%;
+    border-top: 1px solid #00000032;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-message-bar button {
+    margin-left: 1rem;
+}

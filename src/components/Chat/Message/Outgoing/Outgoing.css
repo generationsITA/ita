@@ -1,0 +1,18 @@
+p {
+    margin: 0;
+    padding: 0;
+}
+    
+.outgoing-message-text {
+    color: #fff;
+}
+    
+.outgoing-message-container {
+    text-align: left;
+    display: inline-block;
+    max-width: 300px;
+    background-color: #24c3f9;
+    border-radius: .5rem;
+    padding: .6rem;
+    margin:  4px 16px;
+}

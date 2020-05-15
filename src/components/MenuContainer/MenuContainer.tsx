@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactElement } from 'react';
 import NavigationMenu from './NavigationMenuList/NavigationMenuList';
-import Chat from '../Chat/Chat';
+import Chat from '../Chat';
 import { StyledContainer, StyledMenuContainer } from './MenuContainerStyles';
 import { ItemsInterface } from './types/types';
 import { Route, Switch } from 'react-router-dom';
@@ -39,6 +39,11 @@ const menuItems: ItemsInterface[] = [
         name: 'todo',
         icon: 'far fa-list-alt',
         path: '/todo'
+      },
+      {
+        name: 'chat',
+        icon: 'fa fa-comments-o',
+        path: '/chat'
       }
     ]
   }
@@ -84,7 +89,7 @@ const MenuContainer = () => {
     <StyledMenuContainer data-testid="menu-container">
       <StyledContainer>
         <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
-        <Chat />
+        {/* <Chat /> */}
       </StyledContainer>
       {nestedMenuContent ? (
         <StyledContainer>{nestedMenuContent}</StyledContainer>
