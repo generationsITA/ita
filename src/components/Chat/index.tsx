@@ -31,64 +31,64 @@ interface State {
 class Chat extends Component<Props, State> {
 
   state: State = {
-    message: {text: ''},
+    message: { text: '' },
     messages: []
   }
 
   componentDidMount() {
-    socket = io('localhost:5500');
+    socket = io('https://ita-chat-app.herokuapp.com');
     socket.emit('join', this.props.name, (error: string) => {
-      if(error) {
+      if (error) {
         console.log(error)
       }
     })
-    socket.on('message', ( message: ResponseMessage ) => {
+    socket.on('message', (message: ResponseMessage) => {
       this.setState({
-        messages: [ ...this.state.messages, message ]
+        messages: [...this.state.messages, message]
       })
     });
   }
 
-handleInput = (event: { target: { value: string; }; }) => {
-  this.setState({
-    ...this.state,
-    message: {
-      ...this.state.message,
-      text: event.target.value
-    }
+  handleInput = (event: { target: { value: string; }; }) => {
+    this.setState({
+      ...this.state,
+      message: {
+        ...this.state.message,
+        text: event.target.value
+      }
 
-  })
-}
-
-sendMessage = (event: { preventDefault: () => void; }) => {
-  event.preventDefault();
-  if(this.state.message.text) {
-    socket.emit('sendMessage', this.state.message)
+    })
   }
-}
 
-render () {
+  sendMessage = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+    if (this.state.message.text) {
+      socket.emit('sendMessage', this.state.message)
+    }
+  }
 
-  console.log(this.state)
-  
-  return (
-    <div className='chat'>
-      <ChatHeader />
-      <div className='message-list'>
-        {/* <MessageList messages={this.state.messages} /> */}
-      </div>
-      <input type='text' value={this.state.message.text} 
-      onChange={this.handleInput} 
-      />
-      <button onClick={this.sendMessage}>Send</button>
-      {/* <AddMessage
+  render() {
+
+    console.log(this.state)
+
+    return (
+      <div className='chat'>
+        <ChatHeader />
+        <div className='message-list'>
+          {/* <MessageList messages={this.state.messages} /> */}
+        </div>
+        <input type='text' value={this.state.message.text}
+          onChange={this.handleInput}
+        />
+        <button onClick={this.sendMessage}>Send</button>
+        {/* <AddMessage
         // handleAddMessage={handleAddMessage}
         message={message}
         setMessage={setMessage} /> */}
-    </div>
-  );
-}
-  
+      </div>
+    );
+  }
+
 };
 
 export default Chat;
