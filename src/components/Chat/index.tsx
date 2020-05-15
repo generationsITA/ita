@@ -1,11 +1,10 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { Component } from 'react';
 import './Chat.css';
-// import queryString from 'query-string'; // should be deleted
 import ChatHeader from './ChatHeader/ChatHeader';
 import MessageList from './MessageList/MessageList';
 import AddMessage from './AddMessage/AddMessage';
 import io from 'socket.io-client';
-// import { useLocation } from 'react-router-dom';
+import { chatAuth } from './Join/Join';
 
 let socket: SocketIOClient.Socket;
 
@@ -14,34 +13,37 @@ interface RequestMessage {
   text: string
 }
 
-interface ResponseMessage {
+export interface ResponseMessage {
   name: string,
   text: string
 }
 
 interface Props {
-  name: string
+  chatAuth: chatAuth
 }
 
 interface State {
-  message: RequestMessage,
+  message: ResponseMessage,
   messages: ResponseMessage[]
 }
 
 class Chat extends Component<Props, State> {
 
   state: State = {
-    message: { text: '' },
+    message: { 
+      name: '',
+      text: '' 
+    },
     messages: []
   }
 
   componentDidMount() {
-    socket = io('https://ita-chat-app.herokuapp.com');
-    socket.emit('join', this.props.name, (error: string) => {
+    socket = io('localhost:5500');
+    socket.emit('join', this.props.chatAuth, (error: string) => {
       if (error) {
         console.log(error)
       }
-    })
+    });
     socket.on('message', (message: ResponseMessage) => {
       this.setState({
         messages: [...this.state.messages, message]
@@ -49,42 +51,51 @@ class Chat extends Component<Props, State> {
     });
   }
 
-  handleInput = (event: { target: { value: string; }; }) => {
+  componentWillUnmount() {
+    socket.emit('disconnect')
+  }
+
+  setMessage = (message: string) => {
     this.setState({
       ...this.state,
       message: {
         ...this.state.message,
-        text: event.target.value
+        name: this.props.chatAuth.name,
+        text: message
       }
-
     })
   }
 
-  sendMessage = (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
+  sendMessage = () => {
+    this.setState({
+      messages: [...this.state.messages, this.state.message]
+    })
+
     if (this.state.message.text) {
-      socket.emit('sendMessage', this.state.message)
+      socket.emit('sendMessage', this.state.message, () => this.setState({
+        ...this.state,
+        message: {
+          ...this.state.message,
+          text: ''
+        }
+      }))
     }
   }
 
   render() {
 
-    console.log(this.state)
+const { messages, message } = this.state;
 
     return (
       <div className='chat'>
         <ChatHeader />
         <div className='message-list'>
-          {/* <MessageList messages={this.state.messages} /> */}
+          <MessageList messages={messages} authName={this.props.chatAuth.name}/>
         </div>
-        <input type='text' value={this.state.message.text}
-          onChange={this.handleInput}
-        />
-        <button onClick={this.sendMessage}>Send</button>
-        {/* <AddMessage
-        // handleAddMessage={handleAddMessage}
-        message={message}
-        setMessage={setMessage} /> */}
+        <AddMessage
+        text={message.text}
+        setMessage={this.setMessage}
+        sendMessage={this.sendMessage} />
       </div>
     );
   }

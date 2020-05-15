@@ -1,50 +1,38 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './AddMessage.css';
 
 interface Props {
-    message: string;
-    setMessage: React.Dispatch<React.SetStateAction<string>>;
-    handleAddMessage: (event: { preventDefault: () => void; }) => void;
-
+    text: string,
+    setMessage: (message: string) => void,
+    sendMessage: () => void
 }
 const AddMessage = (props: Props) => {
- //   const [message, setMessage] = useState('')
 
-    const handleInput = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        props.setMessage(event.target.value)
-    }
-
-    // const handleAddMessage = (event: { preventDefault: () => void; }) => {
-    //     event.preventDefault();
-    //     console.log(message)
-    // }
     return (
         <div className='add-message-bar'>
-            <form className='add-message-form' onSubmit={props.handleAddMessage}>
-
                 <TextField
                     label='Type a message...'
                     variant='outlined'
                     type='text'
-                    onChange={handleInput}
-                    value={props.message}
+                    onChange={(event) => props.setMessage(event.target.value)}
+                    value={props.text}
                     fullWidth={true}
                     data-testid='add-message-input'
                     required
+                    onKeyPress={ (event) => event.key === 'Enter' ? props.sendMessage : null }
                 />
-
                 <Button
                     className="submit"
                     variant="contained"
                     color="primary"
                     type="submit"
+                    onClick={props.sendMessage}
+                   
                 >
                     Send
                 </Button>
-            </form>
-
         </div>
     );
 };

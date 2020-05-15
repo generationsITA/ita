@@ -1,51 +1,7 @@
-.message-box {
-    background: #F3F3F3;
-    border-radius: 1rem;
-    padding: .5rem 1rem;
-    color: white;
-    display: inline-block;
-    max-width: 80%;
-  }
-  
-  .message-text {
-    width: 100%;
-    letter-spacing: 0;
-    float: left;
-    font-size: 1rem;
-    word-wrap: break-word;
-  }
-  
-  .message-text img {
-    vertical-align: middle;
-  }
-  
-  .message-container {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 .5rem;
-    margin-top: 4px;
-  }
-  
-  .justify-start {
-    justify-content: flex-start;
-  }
-  
-  .justify-end {
-    justify-content: flex-end;
-  }
-  
-  .color-white {
-    color: white;
-  }
-  
-  .color-dark {
-    color: #353535;
-  }
-  
-  .background-outgoing {
-    background: #24c3f9;
-  }
-  
-  .background-incoming {
-    background: #F3F3F3;
-  }
+.outgoing {
+  text-align: end;
+}
+
+.incoming {
+  text-align: start;
+}

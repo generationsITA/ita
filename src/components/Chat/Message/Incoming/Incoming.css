@@ -1,0 +1,19 @@
+p, h4 {
+    margin: 0;
+    padding: 0;
+}
+
+.incoming-message-user {
+    color: #24c3f9;
+    margin-bottom: 4px;
+}
+
+.incoming-message-container {
+    display: inline-block;
+    max-width: 300px;
+    background-color: #00000010;
+    border-radius: .5rem;
+    padding: .6rem;
+    margin:  4px 16px;
+}
+
