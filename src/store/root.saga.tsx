@@ -1,14 +1,12 @@
 import { watchSignupUser } from './auth/auth.sagas';
 import { watchGetProfileData } from './profile/profile.sagas';
-import { takeEvery, all, call, put, fork, take } from 'redux-saga/effects';
-import { JoinAction, joined, GetMessageAction, SendMessageAction, getMessage } from './chat/chatActions'
-import { JOIN, SEND_MESSAGE, GET_MESSAGE } from './chat/chatConstants';
+import { all, call, put, fork, take } from 'redux-saga/effects';
+import { joined, getMessage } from './chat/chatActions'
+import { JOIN, SEND_MESSAGE } from './chat/chatConstants';
 
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
-
-// let socket: SocketIOClient.Socket;
-// socket = io('http://localhost:5500');
+import { ResponseMessage } from '@components/Chat';
 
 function connectSocket() {
   let socket: SocketIOClient.Socket;
@@ -16,94 +14,52 @@ function connectSocket() {
   return socket;
 }
 
-
-// function* join(action: JoinAction) {
-//   try {
-//     // yield put(showLoader());
-//     // const socket = yield call(connectSocket);
-//     socket.emit('join', action.payload, (error: string) => {
-//       if (error) {
-//         console.log(error)
-//       }
-//     });
-//     yield put(joined());
-
-//   } catch (error) {
-//     console.log("Something went wrong")
-//   }
-// }
-
-// function subscribe(socket: any) {
-//   return eventChannel(emit => {
-//     const update = (message: any) => {
-//       console.log("listened data",message);
-//       return  emit(getMessage(message));
-//     }
-//     console.log("socket listening on get-todos");
-//     socket.on('message', update)
-//     return () => {};
-//   });
-// }
-
-// function* read(socket: any) {
-//   const channel = yield call(subscribe, socket);
-//   while (true) {
-//     let action = yield take(channel);
-//     console.log("action", action);
-//     yield put(action);
-//   }
-// }
-
-export function* write(socket: any) {
-  const join = yield take(JOIN)
-    socket.emit('join', join.payload, (error: string) => {
-      if (error) {
-        console.log(error)
-      }
+function subscribe(socket: SocketIOClient.Socket) {
+  return eventChannel(emit => {
+    const update = (message: ResponseMessage) => {
+      return  emit(getMessage(message));
+    }
+    console.log("socket listening on messages");
+    socket.on('message', update)
+    return () => {};
   });
-    yield put(joined());
+}
+
+function* read(socket: SocketIOClient.Socket) {
+  const channel = yield call(subscribe, socket);
+  while (true) {
+    let action = yield take(channel);
+    yield put(action);
+  }
+}
+
+export function* write(socket: SocketIOClient.Socket) {
+  while (true) {
+    const sendMessage = yield take(SEND_MESSAGE)
+    socket.emit('sendMessage', sendMessage.payload)
+  }
+}
+
+function* handleIO(socket: SocketIOClient.Socket) {
+  yield fork(read, socket);
+  yield fork(write, socket);
 }
 
 export function* flow() {
   const socket = yield call(connectSocket)
-  // yield fork(read, socket)
-  yield fork(write, socket)
-}
+  const join = yield take(JOIN)
+    socket.emit('join', join.payload, (error: string) => {
+      if (error) {
+        console.log(error);
+      }
+  });
 
-
-
-
-
-
-// function* sendMessage(action: SendMessageAction) {
-//   try {
-//     socket.emit('sendMessage', action.payload)
-//   } catch (error) {
-//     console.log("Something went wrong")
-//   }
-// }
-
-// function* getMessage(action: any) {
-//   try {
-//     socket.on('message', action.payload)
-//   } catch (error) {
-//     console.log("Something went wrong")
-//   }
-// }
-
-
-export function* watchJoin() {
-  // yield takeEvery(JOIN, join)
-}
-
-export function* watchSendMessage() {
-  // yield takeEvery(SEND_MESSAGE, sendMessage)
-}
-
-export function* watchGetMessage() {
-  // yield takeEvery(GET_MESSAGE, getMessage)
+  // there should be a check for a unique name
+  
+  yield put(joined());
+  yield fork(handleIO, socket);
 }
 
 export default function* rootSaga() {
-  yield all([call(watchSignupUser), call(watchGetProfileData), call(watchJoin), call(flow)]);
+  yield all([call(watchSignupUser), call(watchGetProfileData), fork(flow)]);
 }

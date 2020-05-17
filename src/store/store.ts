@@ -19,5 +19,5 @@ declare global {
   export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
   
   sagaMiddleware.run(rootSaga);
-  const { dispatch } = store;
+  export const { dispatch } = store;
   export type Dispatch = typeof dispatch;

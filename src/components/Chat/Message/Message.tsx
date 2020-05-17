@@ -1,8 +1,8 @@
 import React from 'react';
 import './Message.css';
-import { ResponseMessage } from '..';
 import Outgoing from './Outgoing/Outgoing';
 import Incoming from './Incoming/Incoming';
+import { ResponseMessage } from '..';
 
 interface Props {
     message: ResponseMessage,

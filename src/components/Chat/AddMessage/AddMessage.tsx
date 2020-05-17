@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './AddMessage.css';
+import { ResponseMessage } from '..';
 
 interface Props {
-    text: string,
-    setMessage: (message: string) => void,
-    sendMessage: () => void
+    authName: string,
+    sendMessage: (message: ResponseMessage) => void
 }
 const AddMessage = (props: Props) => {
+
+    const [text, setText] = useState('')
+
+    let message = {
+        name: props.authName,
+        text: text
+    }
+
+    const onSendButton = (event: any) => {
+        props.sendMessage(message);
+    }
 
     return (
         <div className='add-message-bar'>
@@ -16,8 +27,8 @@ const AddMessage = (props: Props) => {
                     label='Type a message...'
                     variant='outlined'
                     type='text'
-                    onChange={(event) => props.setMessage(event.target.value)}
-                    value={props.text}
+                    onChange={(event) => setText(event.target.value)}
+                    value={text}
                     fullWidth={true}
                     data-testid='add-message-input'
                     required
@@ -28,7 +39,7 @@ const AddMessage = (props: Props) => {
                     variant="contained"
                     color="primary"
                     type="submit"
-                    onClick={props.sendMessage}
+                    onClick={onSendButton}
                    
                 >
                     Send
