@@ -10,8 +10,8 @@ import { ResponseMessage } from '@components/Chat';
 
 function connectSocket() {
   let socket: SocketIOClient.Socket;
-  socket = io('http://localhost:5500');
-  // socket = io('https://ita-chat-app.herokuapp.com/');
+  // socket = io('http://localhost:5500');
+  socket = io('https://ita-chat-app.herokuapp.com/');
   return socket;
 }
 
