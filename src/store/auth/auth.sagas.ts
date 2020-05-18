@@ -84,6 +84,7 @@ function* signupUser(action: any) {
     yield putFile(
       action.payload.file,
       getFileTypes.avatar.path,
+      
       getFileTypes.avatar.name,
       userAuthData.uid || ''
     );
