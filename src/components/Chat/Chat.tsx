@@ -3,7 +3,7 @@ import './Chat.css';
 import ChatHeader from './ChatHeader/ChatHeader';
 import MessageList from './MessageList/MessageList';
 import AddMessage from './AddMessage/AddMessage';
-import { ChatAuth, ResponseMessage } from '.';
+import { ChatAuth, ResponseMessage } from './Join';
 
 interface Props {
   chatAuth: ChatAuth,
@@ -14,17 +14,17 @@ interface Props {
 
 const Chat = (props: Props) => {
 
-    return (
-      <div className='chat'>
-        <ChatHeader />
-        <div className='message-list'>
-          <MessageList messages={props.messages} authName={props.chatAuth.name} />
-        </div>
-        <AddMessage
-          authName={props.chatAuth.name}
-          sendMessage={props.sendMessage} />
+  return (
+    <div className='chat'>
+      <ChatHeader />
+      <div className='message-list'>
+        <MessageList messages={props.messages} authName={props.chatAuth.name} />
       </div>
-    );
+      <AddMessage
+        authName={props.chatAuth.name}
+        sendMessage={props.sendMessage} />
+    </div>
+  );
 };
 
 export default Chat;
