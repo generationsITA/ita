@@ -2,6 +2,7 @@ import React from 'react';
 import './Message.css';
 import Outgoing from './Outgoing/Outgoing';
 import Incoming from './Incoming/Incoming';
+import System from './System/System';
 import { ResponseMessage } from '..';
 
 interface Props {
@@ -11,25 +12,24 @@ interface Props {
 
 const Message = (props: Props) => {
 
-  let isSentByCurrentUser = false;
   const trimmedName = props.authName.trim().toLowerCase();
-
-  if(props.message.name === trimmedName) {
-    isSentByCurrentUser = true;
-  }
 
   const {name, text} = props.message;
     return (
-         isSentByCurrentUser ? (
-                <div className='outgoing'>
+      props.message.name === 'System' ? (
+        <div className='system'>
+          <System text={text} />
+        </div>
+      ) : props.message.name === trimmedName ? (
+        <div className='outgoing'>
                   <Outgoing name={name} text={text}/>
                 </div>
-                ) : (
-                  <div className='incoming'>
-                    <Incoming name={name} text={text} />
-                  </div>
-                )
-    );
+      ) : (
+        <div className='incoming'>
+        <Incoming name={name} text={text} />
+      </div>
+      )
+    )
 };
 
 export default Message;
