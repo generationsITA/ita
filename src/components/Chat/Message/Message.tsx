@@ -12,6 +12,8 @@ interface Props {
 
 const Message = (props: Props) => {
 
+  console.log(props.authName)
+
   const trimmedName = props.authName.trim().toLowerCase();
 
   const {name, text} = props.message;

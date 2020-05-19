@@ -36,9 +36,6 @@ class AddMessage extends Component<Props> {
         } 
       }
     render() {
-
-        console.log(this.state)
-
     return (
         <div className='add-message-bar'>
                  <TextField

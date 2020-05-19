@@ -67,7 +67,7 @@ const Join = (props: ComponentProps) => {
   return (
     <div>
       {props.joined ? <Chat
-      chatAuth={chatAuth} 
+      chatAuth={props.chatAuth} 
       messages={props.messages}
       sendMessage={props.sendMessage}
       getMessage={props.getMessage}
