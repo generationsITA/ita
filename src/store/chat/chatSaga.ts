@@ -28,6 +28,7 @@ function* read(socket: SocketIOClient.Socket) {
     while (true) {
         let action = yield take(channel);
         yield put(action);
+        yield console.log(action);
     }
 }
 

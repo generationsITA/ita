@@ -10,7 +10,7 @@ interface Props {
 }
 const AddMessage = (props: Props) => {
 
-    const [text, setText] = useState('')
+    const [text, setText] = useState('');
 
     let message = {
         name: props.authName,
@@ -19,6 +19,7 @@ const AddMessage = (props: Props) => {
 
     const onSendButton = (event: any) => {
         props.sendMessage(message);
+        setText('');
     }
 
     return (
