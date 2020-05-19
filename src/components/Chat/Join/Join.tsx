@@ -51,6 +51,7 @@ const Join = (props: ComponentProps) => {
           </div>
           <Button
             variant="contained"
+            disabled={!name || name === 'System' || name === 'system' ? true : false}
             color="primary"
             type="submit"
             fullWidth={true}
