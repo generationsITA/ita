@@ -33,7 +33,7 @@ const AddMessage = (props: Props) => {
                 fullWidth={true}
                 data-testid='add-message-input'
                 required
-                onKeyPress={(event) => event.key === 'Enter' ? props.sendMessage : null}
+                onKeyPress={event => event.key === 'Enter' ? onSendButton(event) : null}
             />
             <Button
                 className="submit"
