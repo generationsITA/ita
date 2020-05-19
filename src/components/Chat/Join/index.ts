@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { join, getMessage, sendMessage } from '@store/chat/chatActions';
 import { ChatState } from '@store/chat/chatReducer';
-import { Join } from '../Join/Join';
+import { Join } from './Join';
+
 
 export interface ChatAuth {
     name: string,
@@ -13,9 +14,10 @@ export interface ResponseMessage {
     name: string,
     text: string
 }
-
 interface ConnectedProps {
-    chatAuth: ChatAuth,
+    chatAuth: ChatAuth;
+    message: ResponseMessage;
+    messages: ResponseMessage[],
     joined: boolean
 }
 
@@ -25,6 +27,8 @@ export type JoinProps = ConnectedProps &
 const mapStateToProps = (state: { chatReducer: ChatState }): ConnectedProps => {
     return {
         chatAuth: state.chatReducer.chatAuth,
+        message: state.chatReducer.message,
+        messages: state.chatReducer.messages,
         joined: state.chatReducer.joined
     };
 };
@@ -33,9 +37,6 @@ const mapDispatchToProps = (dispatch: any) => ({
     join: (chatAuth: ChatAuth) => {
         return dispatch(join(chatAuth))
     },
-    // setNickname: (p: string) => {
-    //     return dispatch(setNickname(p));
-    // }
     getMessage: (message: ResponseMessage) => {
         return dispatch(getMessage(message))
     },
@@ -43,6 +44,5 @@ const mapDispatchToProps = (dispatch: any) => ({
         return dispatch(sendMessage(message))
     }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Join);

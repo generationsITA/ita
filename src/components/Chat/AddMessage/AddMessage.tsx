@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './AddMessage.css';
-import { ResponseMessage } from '..';
+import { ResponseMessage } from '../Join';
 
 interface Props {
     authName: string,
@@ -23,26 +23,26 @@ const AddMessage = (props: Props) => {
 
     return (
         <div className='add-message-bar'>
-                <TextField
-                    label='Type a message...'
-                    variant='outlined'
-                    type='text'
-                    onChange={(event) => setText(event.target.value)}
-                    value={text}
-                    fullWidth={true}
-                    data-testid='add-message-input'
-                    required
-                    onKeyPress={ (event) => event.key === 'Enter' ? props.sendMessage : null }
-                />
-                <Button
-                    className="submit"
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    onClick={onSendButton}
-                   
-                >
-                    Send
+            <TextField
+                label='Type a message...'
+                variant='outlined'
+                type='text'
+                onChange={(event) => setText(event.target.value)}
+                value={text}
+                fullWidth={true}
+                data-testid='add-message-input'
+                required
+                onKeyPress={(event) => event.key === 'Enter' ? props.sendMessage : null}
+            />
+            <Button
+                className="submit"
+                variant="contained"
+                color="primary"
+                type="submit"
+                onClick={onSendButton}
+
+            >
+                Send
                 </Button>
         </div>
     );

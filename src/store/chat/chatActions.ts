@@ -1,5 +1,5 @@
-import { JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT} from './chatConstants';
-import { ChatAuth, ResponseMessage } from '@components/Chat';
+import { JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT } from './chatConstants';
+import { ChatAuth, ResponseMessage } from '@components/Chat/Join';
 
 
 export interface JoinAction {
@@ -48,8 +48,8 @@ export const disconnect = (): DisconnectAction => ({
     type: DISCONNECT
 })
 
-export type chatActions = JoinAction 
-    | JoinedAction 
-    | GetMessageAction 
-    | SendMessageAction 
+export type chatActions = JoinAction
+    | JoinedAction
+    | GetMessageAction
+    | SendMessageAction
     | DisconnectAction;

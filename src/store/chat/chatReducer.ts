@@ -2,7 +2,7 @@ import { chatActions } from './chatActions';
 import {
     JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT
 } from './chatConstants';
-import { ChatAuth, ResponseMessage } from '@components/Chat';
+import { ChatAuth, ResponseMessage } from '@components/Chat/Join';
 
 export interface ChatState {
     chatAuth: ChatAuth,

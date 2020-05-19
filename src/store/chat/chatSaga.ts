@@ -3,7 +3,7 @@ import { joined, getMessage } from '../chat/chatActions'
 import { JOIN, SEND_MESSAGE } from '../chat/chatConstants';
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
-import { ResponseMessage } from '@components/Chat';
+import { ResponseMessage } from '@components/Chat/Join';
 
 function connectSocket() {
     let socket: SocketIOClient.Socket;
