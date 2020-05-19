@@ -17,8 +17,9 @@ const AddMessage = (props: Props) => {
         text: text
     }
 
-    const onSendButton = (event: any) => {
+    const onSendButton = (): void => {
         props.sendMessage(message);
+        setText('');
     }
 
     return (
@@ -30,17 +31,23 @@ const AddMessage = (props: Props) => {
                     onChange={(event) => setText(event.target.value)}
                     value={text}
                     fullWidth={true}
+                    multiline
+                    rowsMax={1}
                     data-testid='add-message-input'
                     required
-                    onKeyPress={ (event) => event.key === 'Enter' ? props.sendMessage : null }
+                    onKeyPress={ (e) => {
+                        if (e.key === 'Enter') {
+                          onSendButton()
+                        }
+                    }}
                 />
                 <Button
+                    disabled={!text ? true : false}
                     className="submit"
                     variant="contained"
                     color="primary"
                     type="submit"
                     onClick={onSendButton}
-                   
                 >
                     Send
                 </Button>

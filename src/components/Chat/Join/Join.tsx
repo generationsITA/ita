@@ -56,7 +56,7 @@ const Join = (props: ComponentProps) => {
             fullWidth={true}
             onClick={ joinButtonClick }
           >
-            Sign In
+            Join
           </Button>
         </div>
       </div>
