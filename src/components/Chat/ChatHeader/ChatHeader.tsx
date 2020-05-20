@@ -1,8 +1,5 @@
 import React from 'react';
 import './ChatHeader.css';
-import { IconButton } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import Join from '../Join';
 
 interface Props {
     joined: boolean,

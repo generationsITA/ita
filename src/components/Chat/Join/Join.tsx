@@ -41,12 +41,13 @@ export const Join = (props: JoinProps) => {
           </div>
           <Button
             variant="contained"
+            disabled={!name || name === 'System' || name === 'system' ? true : false}
             color="primary"
             type="submit"
             fullWidth={true}
             onClick={joinButtonClick}
           >
-            Sign In
+            Join
           </Button>
         </div>
       </div>

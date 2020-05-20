@@ -35,6 +35,9 @@ export const GlobalCSS = withStyles({
     '.MuiOutlinedInput-root': {
       borderRadius: '50px'
     },
+    '.MuiOutlinedInput-multiline': {
+      padding: '4px'
+    },
     '.MuiInputLabel-outlined': {
       position: 'absolute',
       top: '50%',
