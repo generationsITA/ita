@@ -54,7 +54,7 @@ export const Join = (props: JoinProps) => {
 
   return (
     <div>
-      {props.chatAuth.name !== '' ? <Chat
+      {props.chatAuth.name !== '' && props.joined ? <Chat
         chatAuth={chatAuth}
         messages={props.messages}
         sendMessage={props.sendMessage}

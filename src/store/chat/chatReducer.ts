@@ -32,11 +32,11 @@ export const chatReducer = (state = initialState, action: chatActions): ChatStat
                 chatAuth: action.payload,
                 joined: true
             }
-        case JOINED:
-            return {
-                ...state,
-                joined: true
-            }
+        // case JOINED:
+        //     return {
+        //         ...state,
+        //         joined: true
+        //     }
         case GET_MESSAGE:
             return {
                 ...state,

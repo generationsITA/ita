@@ -1,5 +1,5 @@
 import { call, put, fork, take, takeEvery } from 'redux-saga/effects';
-import { joined, getMessage, disconnect } from '../chat/chatActions'
+import {  getMessage, disconnect } from '../chat/chatActions'
 import { JOIN, SEND_MESSAGE, DISCONNECT } from '../chat/chatConstants';
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
@@ -68,6 +68,6 @@ export function* join(socket: SocketIOClient.Socket) {
 export function* flow() {
     const socket = yield call(connectSocket)
     yield fork(join, socket);
-    yield put(joined());
+  //  yield put(joined());
     yield fork(handleIO, socket);
 }
