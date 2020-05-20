@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-import './Chat.css';
-import ChatHeader from './ChatHeader/ChatHeader';
-import MessageList from './MessageList/MessageList';
-import AddMessage from './AddMessage/AddMessage';
-import io from 'socket.io-client';
-import { chatAuth } from './Join/Join';
+import React from 'react';
+// import { connect } from 'react-redux';
+// import { join, getMessage, sendMessage } from '@store/chat/chatActions';
+// import { ChatState } from '@store/chat/chatReducer';
+// import Join from './Join/Join';
 
-let socket: SocketIOClient.Socket;
-
-interface RequestMessage {
-  id?: string,
-  text: string
+export interface ChatAuth {
+  name: string,
+  room: string
 }
 
 export interface ResponseMessage {
@@ -18,88 +14,36 @@ export interface ResponseMessage {
   text: string
 }
 
-interface Props {
-  chatAuth: chatAuth
-}
+// interface ConnectedProps {
+//   chatAuth: ChatAuth;
+//   message: ResponseMessage;
+//   messages: ResponseMessage[],
+//   joined: boolean
+// }
 
-interface State {
-  message: ResponseMessage,
-  messages: ResponseMessage[]
-}
+// export type JoinProps = ConnectedProps &
+//   ReturnType<typeof mapDispatchToProps>;
 
-class Chat extends Component<Props, State> {
+// const mapStateToProps = (state: { chatReducer: ChatState }): ConnectedProps => {
+//   return {
+//     chatAuth: state.chatReducer.chatAuth,
+//     message: state.chatReducer.message,
+//     messages: state.chatReducer.messages,
+//     joined: state.chatReducer.joined
+//   };
+// };
 
-  state: State = {
-    message: {
-      name: '',
-      text: ''
-    },
-    messages: []
-  }
+// const mapDispatchToProps = (dispatch: any) => ({
+//   join: (chatAuth: ChatAuth) => {
+//     return dispatch(join(chatAuth))
+//   },
+//   getMessage: (message: ResponseMessage) => {
+//     return dispatch(getMessage(message))
+//   },
+//   sendMessage: (message: ResponseMessage) => {
+//     return dispatch(sendMessage(message))
+//   }
+// });
 
-  componentDidMount() {
-    socket = io('https://ita-chat-app.herokuapp.com/');
-    socket.emit('join', this.props.chatAuth, (error: string) => {
-      if (error) {
-        console.log(error)
-      }
-    });
-    socket.on('message', (message: ResponseMessage) => {
-      this.setState({
-        messages: [...this.state.messages, message]
-      })
-    });
-  }
 
-  componentWillUnmount() {
-    socket.emit('disconnect')
-  }
-
-  setMessage = (message: string) => {
-    this.setState({
-      ...this.state,
-      message: {
-        ...this.state.message,
-        name: this.props.chatAuth.name,
-        text: message
-      }
-    })
-  }
-
-  sendMessage = () => {
-    this.setState({
-      messages: [...this.state.messages, this.state.message]
-    })
-
-    if (this.state.message.text) {
-      socket.emit('sendMessage', this.state.message, () => this.setState({
-        ...this.state,
-        message: {
-          ...this.state.message,
-          text: ''
-        }
-      }))
-    }
-  }
-
-  render() {
-
-    const { messages, message } = this.state;
-
-    return (
-      <div className='chat'>
-        <ChatHeader />
-        <div className='message-list'>
-          <MessageList messages={messages} authName={this.props.chatAuth.name} />
-        </div>
-        <AddMessage
-          text={message.text}
-          setMessage={this.setMessage}
-          sendMessage={this.sendMessage} />
-      </div>
-    );
-  }
-
-};
-
-export default Chat;
+// export default connect(mapStateToProps, mapDispatchToProps)(Join);

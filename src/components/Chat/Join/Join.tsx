@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
-import Chat from '../index';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './Join.css';
+import Chat from '../Chat';
+import { join, getMessage, sendMessage } from '@store/chat/chatActions';
+import { connect } from 'react-redux';
+import { ChatState } from '@store/chat/chatReducer';
+import { ChatAuth, ResponseMessage } from '..';
 
-export interface chatAuth {
-  name: string,
-  room: string
+interface ConnectedProps {
+  chatAuth: ChatAuth;
+  message: ResponseMessage;
+  messages: ResponseMessage[],
+  joined: boolean
 }
 
-const Join = () => {
+export type ComponentProps = ConnectedProps &
+  ReturnType<typeof mapDispatchToProps>;
+
+const Join = (props: ComponentProps) => {
   const [name, setName] = useState('');
-  const [input, setInput] = useState('');
-  const [ room, setRoom ] = useState('general');
+  const [room, setRoom] = useState('general');
 
   const chatAuth = {
     name,
     room
   }
 
-  
+  const joinButtonClick = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+    props.join(chatAuth)
+  }
 
   const joinForm = () => {
     return (
@@ -27,25 +38,26 @@ const Join = () => {
         <div className="join-inner">
           <h1 className="heading">Join Chat</h1>
           <div className='join-row'>
-          <TextField
-                    label='Name'
-                    variant='outlined'
-                    type='text'
-                    onChange={(event) => setInput(event.target.value)} 
-                    value={input}
-                    fullWidth={true}
-                    data-testid='add-message-input'
-                    required
-                />
+            <TextField
+              label='Name'
+              variant='outlined'
+              type='text'
+              onChange={(event) => setName(event.target.value)}
+              value={name}
+              fullWidth={true}
+              data-testid='add-message-input'
+              required
+            />
           </div>
-          <Button 
+          <Button
             variant="contained"
+            disabled={!name || name === 'System' || name === 'system' ? true : false}
             color="primary"
             type="submit"
             fullWidth={true}
-            onClick={(event)  => { setName(input) }}
+            onClick={ joinButtonClick }
           >
-            Sign In
+            Join
           </Button>
         </div>
       </div>
@@ -54,10 +66,36 @@ const Join = () => {
 
   return (
     <div>
-      {name ? <Chat chatAuth={chatAuth} /> : joinForm()}
+      {props.joined ? <Chat
+      chatAuth={props.chatAuth} 
+      messages={props.messages}
+      sendMessage={props.sendMessage}
+      getMessage={props.getMessage}
+      /> : joinForm()}
     </div>
 
   )
 };
 
-export default Join;
+const mapStateToProps = (state: { chatReducer: ChatState }): ConnectedProps => {
+  return {
+    chatAuth: state.chatReducer.chatAuth,
+    message: state.chatReducer.message,
+    messages: state.chatReducer.messages,
+    joined: state.chatReducer.joined
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => ({
+  join: (chatAuth: ChatAuth) => {
+    return dispatch(join(chatAuth))
+  },
+  getMessage: (message: ResponseMessage) => {
+    return dispatch(getMessage(message))
+  },
+  sendMessage: (message: ResponseMessage) => {
+    return dispatch(sendMessage(message))
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Join);

@@ -1,40 +1,69 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './AddMessage.css';
+import { ResponseMessage } from '..';
 
 interface Props {
-    text: string,
-    setMessage: (message: string) => void,
-    sendMessage: () => void
+    authName: string,
+    sendMessage: (message: ResponseMessage) => void
 }
-const AddMessage = (props: Props) => {
 
+
+class AddMessage extends Component<Props> {
+
+    state = {
+        name: this.props.authName,
+        text: ''
+    }
+
+    handleInputChange = (event: { target: { value: string; }; }): void => {
+            this.setState({
+                text: event.target.value
+            })
+    }
+
+    onSendButton = (): void => {
+        this.props.sendMessage(this.state);
+        this.setState({
+            text: ''
+        })
+    }
+
+    handleKeyPress = (event: any) => {
+        if (event.key === 'Enter' && this.state.text) {
+            this.onSendButton()
+        } 
+      }
+    render() {
     return (
         <div className='add-message-bar'>
-                <TextField
+                 <TextField
                     label='Type a message...'
                     variant='outlined'
-                    type='text'
-                    onChange={(event) => props.setMessage(event.target.value)}
-                    value={props.text}
-                    fullWidth={true}
-                    data-testid='add-message-input'
-                    required
-                    onKeyPress={ (event) => event.key === 'Enter' ? props.sendMessage : null }
-                />
+                     type='text'
+                     onChange={this.handleInputChange}
+                     value={this.state.text}
+                     fullWidth={true}
+                    // multiline
+                    //  rows={2}
+                    //  rowsMax={2}
+                     data-testid='add-message-input'
+                     onKeyPress={this.handleKeyPress}
+                 />
                 <Button
+                    disabled={!this.state.text ? true : false}
                     className="submit"
                     variant="contained"
                     color="primary"
                     type="submit"
-                    onClick={props.sendMessage}
-                   
+                    onClick={this.onSendButton}
                 >
                     Send
                 </Button>
         </div>
     );
+    }
 };
 
 export default AddMessage;
