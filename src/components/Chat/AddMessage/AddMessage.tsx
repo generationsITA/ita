@@ -63,8 +63,7 @@ class AddMessage extends Component<Props> {
                 onClick={onSendButton}
 
             >
-                Send
-                ======= */}
+                */}
                 <TextField
                     label='Type a message...'
                     variant='outlined'
