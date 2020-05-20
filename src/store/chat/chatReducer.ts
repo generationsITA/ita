@@ -29,7 +29,8 @@ export const chatReducer = (state = initialState, action: chatActions): ChatStat
         case JOIN:
             return {
                 ...state,
-                chatAuth: action.payload
+                chatAuth: action.payload,
+                joined: true
             }
         case JOINED:
             return {
@@ -49,6 +50,10 @@ export const chatReducer = (state = initialState, action: chatActions): ChatStat
         case DISCONNECT:
             return {
                 ...state,
+                chatAuth: {
+                    name: '',
+                    room: ''
+                },
                 joined: false
             }
         default:
