@@ -1,9 +1,9 @@
-import { call, put, fork, take } from 'redux-saga/effects';
-import { joined, getMessage } from '../chat/chatActions'
-import { JOIN, SEND_MESSAGE } from '../chat/chatConstants';
+import { call, put, fork, take, takeEvery } from 'redux-saga/effects';
+import { joined, getMessage, disconnect } from '../chat/chatActions'
+import { JOIN, SEND_MESSAGE, DISCONNECT } from '../chat/chatConstants';
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
-import { ResponseMessage } from '@components/Chat';
+import { ResponseMessage } from '@components/Chat/Join';
 
 function connectSocket() {
     let socket: SocketIOClient.Socket;
@@ -28,6 +28,7 @@ function* read(socket: SocketIOClient.Socket) {
     while (true) {
         let action = yield take(channel);
         yield put(action);
+        yield console.log(action);
     }
 }
 
@@ -38,9 +39,19 @@ export function* write(socket: SocketIOClient.Socket) {
     }
 }
 
+export function* disconnectSaga(socket: SocketIOClient.Socket) {
+    while (true) {
+        yield take(DISCONNECT)
+        socket.emit('disconnect');
+        socket.close();
+        console.log('User disconnected', socket);
+    }
+}
+
 function* handleIO(socket: SocketIOClient.Socket) {
     yield fork(read, socket);
     yield fork(write, socket);
+    yield fork(disconnectSaga, socket);
 }
 
 export function* flow() {
@@ -51,9 +62,13 @@ export function* flow() {
             console.log(error);
         }
     });
-
-    // there should be a check for a unique name
-
     yield put(joined());
     yield fork(handleIO, socket);
+    //  yield put(disconnect());
+    // while (true) {
+    //     yield take(DISCONNECT)
+    //     socket.emit('disconnect');
+    //     console.log('User disconnected');
+    //     console.log(socket);
+    // }
 }

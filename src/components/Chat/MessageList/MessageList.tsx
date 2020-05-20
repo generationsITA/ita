@@ -1,7 +1,7 @@
 import React from 'react';
 import './MessageList.css';
 import Message from '../Message/Message';
-import { ResponseMessage } from '..';
+import { ResponseMessage } from '../Join';
 import ScrollableFeed from 'react-scrollable-feed'
 
 interface Props {

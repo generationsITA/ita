@@ -10,7 +10,7 @@ import Auth from "@components/Auth/auth.component";
 
 import Todo from "@components/Todo";
 // import Chat from "@components/Chat";
-import Join from "@components/Chat/Join/Join";
+import Join from "@components/Chat/Join";
 
 const StyledContentWrapper = styled.div`
   width: 100%;
@@ -20,7 +20,7 @@ const StyledContentWrapper = styled.div`
   flex-flow: column;
 `;
 
-const ContentWrapper = (props: {id: string}) => {
+const ContentWrapper = (props: { id: string }) => {
   return (
     <StyledContentWrapper>
       <Switch>

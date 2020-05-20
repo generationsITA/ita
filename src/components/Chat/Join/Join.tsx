@@ -3,22 +3,10 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './Join.css';
 import Chat from '../Chat';
-import { join, getMessage, sendMessage } from '@store/chat/chatActions';
-import { connect } from 'react-redux';
-import { ChatState } from '@store/chat/chatReducer';
-import { ChatAuth, ResponseMessage } from '..';
+import { JoinProps } from '.';
 
-interface ConnectedProps {
-  chatAuth: ChatAuth;
-  message: ResponseMessage;
-  messages: ResponseMessage[],
-  joined: boolean
-}
 
-export type ComponentProps = ConnectedProps &
-  ReturnType<typeof mapDispatchToProps>;
-
-const Join = (props: ComponentProps) => {
+export const Join = (props: JoinProps) => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('general');
 
@@ -29,7 +17,9 @@ const Join = (props: ComponentProps) => {
 
   const joinButtonClick = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    props.join(chatAuth)
+    props.join(chatAuth);
+    console.log(props.joined, props.chatAuth);
+   // setName('');
   }
 
   const joinForm = () => {
@@ -55,7 +45,7 @@ const Join = (props: ComponentProps) => {
             color="primary"
             type="submit"
             fullWidth={true}
-            onClick={ joinButtonClick }
+            onClick={joinButtonClick}
           >
             Join
           </Button>
@@ -67,35 +57,15 @@ const Join = (props: ComponentProps) => {
   return (
     <div>
       {props.joined ? <Chat
-      chatAuth={props.chatAuth} 
-      messages={props.messages}
-      sendMessage={props.sendMessage}
-      getMessage={props.getMessage}
+        chatAuth={chatAuth}
+        messages={props.messages}
+        sendMessage={props.sendMessage}
+        getMessage={props.getMessage}
+        joined={props.joined}
+        disconnect={props.disconnect}
       /> : joinForm()}
     </div>
 
   )
 };
 
-const mapStateToProps = (state: { chatReducer: ChatState }): ConnectedProps => {
-  return {
-    chatAuth: state.chatReducer.chatAuth,
-    message: state.chatReducer.message,
-    messages: state.chatReducer.messages,
-    joined: state.chatReducer.joined
-  };
-};
-
-const mapDispatchToProps = (dispatch: any) => ({
-  join: (chatAuth: ChatAuth) => {
-    return dispatch(join(chatAuth))
-  },
-  getMessage: (message: ResponseMessage) => {
-    return dispatch(getMessage(message))
-  },
-  sendMessage: (message: ResponseMessage) => {
-    return dispatch(sendMessage(message))
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Join);

@@ -2,7 +2,7 @@ import { chatActions } from './chatActions';
 import {
     JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT
 } from './chatConstants';
-import { ChatAuth, ResponseMessage } from '@components/Chat';
+import { ChatAuth, ResponseMessage } from '@components/Chat/Join';
 
 export interface ChatState {
     chatAuth: ChatAuth,
@@ -45,6 +45,11 @@ export const chatReducer = (state = initialState, action: chatActions): ChatStat
             return {
                 ...state,
                 messages: [...state.messages, action.payload]
+            }
+        case DISCONNECT:
+            return {
+                ...state,
+                joined: false
             }
         default:
             return state;
