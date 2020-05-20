@@ -12,13 +12,13 @@ export const join = (payload: ChatAuth): JoinAction => ({
     payload
 })
 
-export interface JoinedAction {
-    type: typeof JOINED;
-}
+// export interface JoinedAction {
+//     type: typeof JOINED;
+// }
 
-export const joined = (): JoinedAction => ({
-    type: JOINED
-})
+// export const joined = (): JoinedAction => ({
+//     type: JOINED
+// })
 
 export interface GetMessageAction {
     type: typeof GET_MESSAGE;
@@ -49,7 +49,7 @@ export const disconnect = (): DisconnectAction => ({
 })
 
 export type chatActions = JoinAction
-    | JoinedAction
+  //  | JoinedAction
     | GetMessageAction
     | SendMessageAction
     | DisconnectAction;

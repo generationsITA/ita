@@ -1,5 +1,5 @@
 import { call, put, fork, take, takeEvery } from 'redux-saga/effects';
-import { joined, getMessage, disconnect } from '../chat/chatActions'
+import {  getMessage, disconnect } from '../chat/chatActions'
 import { JOIN, SEND_MESSAGE, DISCONNECT } from '../chat/chatConstants';
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
@@ -7,8 +7,8 @@ import { ResponseMessage } from '@components/Chat/Join';
 
 function connectSocket() {
     let socket: SocketIOClient.Socket;
-    // socket = io('http://localhost:5500');
-    socket = io('https://ita-chat-app.herokuapp.com/');
+    socket = io('http://localhost:5501');
+    //socket = io('https://ita-chat-app.herokuapp.com/');
     return socket;
 }
 
@@ -42,9 +42,8 @@ export function* write(socket: SocketIOClient.Socket) {
 export function* disconnectSaga(socket: SocketIOClient.Socket) {
     while (true) {
         yield take(DISCONNECT)
-        socket.emit('disconnect');
-        socket.close();
-        console.log('User disconnected', socket);
+        socket.emit('leaveRoom');
+        console.log('User leaved chat', socket);
     }
 }
 
@@ -54,21 +53,21 @@ function* handleIO(socket: SocketIOClient.Socket) {
     yield fork(disconnectSaga, socket);
 }
 
+export function* join(socket: SocketIOClient.Socket) {
+    while (true) {
+        const join = yield take(JOIN)
+        console.log(join.payload);
+        socket.emit('join', join.payload, (error: string) => {
+            if (error) {
+                console.log(error);
+            }
+        });
+    };
+}
+
 export function* flow() {
     const socket = yield call(connectSocket)
-    const join = yield take(JOIN)
-    socket.emit('join', join.payload, (error: string) => {
-        if (error) {
-            console.log(error);
-        }
-    });
-    yield put(joined());
+    yield fork(join, socket);
+  //  yield put(joined());
     yield fork(handleIO, socket);
-    //  yield put(disconnect());
-    // while (true) {
-    //     yield take(DISCONNECT)
-    //     socket.emit('disconnect');
-    //     console.log('User disconnected');
-    //     console.log(socket);
-    // }
 }
