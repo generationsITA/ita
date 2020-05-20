@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { join, getMessage, sendMessage } from '@store/chat/chatActions';
+import { join, getMessage, sendMessage, disconnect } from '@store/chat/chatActions';
 import { ChatState } from '@store/chat/chatReducer';
 import { Join } from './Join';
 
@@ -42,6 +42,9 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
     sendMessage: (message: ResponseMessage) => {
         return dispatch(sendMessage(message))
+    },
+    disconnect: () => {
+        return dispatch(disconnect());
     }
 });
 

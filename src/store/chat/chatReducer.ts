@@ -46,6 +46,11 @@ export const chatReducer = (state = initialState, action: chatActions): ChatStat
                 ...state,
                 messages: [...state.messages, action.payload]
             }
+        case DISCONNECT:
+            return {
+                ...state,
+                joined: false
+            }
         default:
             return state;
     }
