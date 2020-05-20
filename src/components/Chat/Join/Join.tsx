@@ -18,6 +18,8 @@ export const Join = (props: JoinProps) => {
   const joinButtonClick = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     props.join(chatAuth);
+    console.log(props.joined, props.chatAuth);
+    // setName('');
   }
 
   const joinForm = () => {
@@ -39,7 +41,7 @@ export const Join = (props: JoinProps) => {
           </div>
           <Button
             variant="contained"
-            disabled={!name || name === 'System' || name === 'system' ? true : false}
+            disabled={!name.trim() || name === 'System' || name === 'system' ? true : false}
             color="primary"
             type="submit"
             fullWidth={true}
@@ -54,7 +56,7 @@ export const Join = (props: JoinProps) => {
 
   return (
     <div>
-      {props.chatAuth.name !== '' && props.joined ? <Chat
+      {props.joined ? <Chat
         chatAuth={chatAuth}
         messages={props.messages}
         sendMessage={props.sendMessage}

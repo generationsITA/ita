@@ -31,6 +31,7 @@ class AddMessage extends Component<Props> {
     // }
     onSendButton = (): void => {
         this.props.sendMessage(this.state);
+        console.log(this.state)
         this.setState({
             text: ''
         })
@@ -71,14 +72,14 @@ class AddMessage extends Component<Props> {
                     onChange={this.handleInputChange}
                     value={this.state.text}
                     fullWidth={true}
-                    // multiline
-                    //  rows={2}
-                    //  rowsMax={2}
+                    multiline
+                    rows={2}
+                    rowsMax={2}
                     data-testid='add-message-input'
                     onKeyPress={this.handleKeyPress}
                 />
                 <Button
-                    disabled={!this.state.text ? true : false}
+                    disabled={!this.state.text.trim() ? true : false}
                     className="submit"
                     variant="contained"
                     color="primary"
