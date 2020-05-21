@@ -5,7 +5,7 @@ interface Props {
     text: string
 }
 
-const System = (props: Props) => {
+const System = (props: Props): JSX.Element => {
     const { text } = props
     return (
         <div className='system-message-container'>

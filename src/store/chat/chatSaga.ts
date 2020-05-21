@@ -1,6 +1,6 @@
-import { call, put, fork, take, takeEvery } from 'redux-saga/effects';
-import { getMessage, disconnect, getCurrentSocketId } from '../chat/chatActions'
-import { JOIN, SEND_MESSAGE, DISCONNECT, CURRENT_SOCKET_ID } from '../chat/chatConstants';
+import { call, put, fork, take } from 'redux-saga/effects';
+import { getMessage, getCurrentSocketId } from '../chat/chatActions'
+import { JOIN, SEND_MESSAGE, DISCONNECT } from '../chat/chatConstants';
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
 import { ResponseMessage } from '@components/Chat/Join';

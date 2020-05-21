@@ -10,7 +10,7 @@ interface Props {
     idSocket: string
 }
 
-const MessageList = (props: Props) => {
+const MessageList = (props: Props): JSX.Element => {
     return (
         <div className='message-list' id='list'>
             <ScrollableFeed forceScroll={true}>

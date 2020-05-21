@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Chat.css';
 import ChatHeader from './ChatHeader/ChatHeader';
 import MessageList from './MessageList/MessageList';

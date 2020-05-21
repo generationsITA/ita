@@ -10,22 +10,21 @@ interface Props {
     id: string
 }
 
-
 class AddMessage extends Component<Props> {
 
-    state = {
+    state: ResponseMessage = {
         name: this.props.authName,
         text: '',
         id: this.props.id
     }
 
-    handleInputChange = (event: { target: { value: string; }; }): void => {
+    private handleInputChange = (event: { target: { value: string; }; }): void => {
         this.setState({
             text: event.target.value
         })
     }
 
-    onSendButton = (): void => {
+    private onSendButton = (): void => {
         this.props.sendMessage(this.state);
         console.log(this.state)
         this.setState({
@@ -33,7 +32,7 @@ class AddMessage extends Component<Props> {
         })
     }
 
-    handleKeyPress = (event: any) => {
+    private handleKeyPress = (event: { key: string; }): void => {
         if (event.key === 'Enter' && this.state.text) {
             this.onSendButton()
         }
@@ -48,9 +47,6 @@ class AddMessage extends Component<Props> {
                     onChange={this.handleInputChange}
                     value={this.state.text}
                     fullWidth={true}
-                    // multiline
-                    // rows={2}
-                    // rowsMax={2}
                     data-testid='add-message-input'
                     onKeyPress={this.handleKeyPress}
                 />

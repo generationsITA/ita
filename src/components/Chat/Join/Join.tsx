@@ -3,26 +3,23 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './Join.css';
 import Chat from '../Chat';
-import { JoinProps } from '.';
+import { JoinProps, ChatAuth } from '.';
 
-
-export const Join = (props: JoinProps) => {
+export const Join = (props: JoinProps): JSX.Element => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('general');
 
-  const chatAuth = {
+  const chatAuth: ChatAuth = {
     name,
     room
   }
 
-
-  const joinButtonClick = (event: { preventDefault: () => void; }) => {
+  const joinButtonClick = (event: { preventDefault: () => void; }): void => {
     event.preventDefault();
     props.join(chatAuth);
-    console.log(chatAuth);
   }
 
-  const joinForm = () => {
+  const joinForm = (): JSX.Element => {
     return (
       <div className="join-container">
         <div className="join-inner">
@@ -41,7 +38,7 @@ export const Join = (props: JoinProps) => {
           </div>
           <Button
             variant="contained"
-            disabled={!name.trim() || name === 'System' || name === 'system' ? true : false}
+            disabled={!name.trim() ? true : false}
             color="primary"
             type="submit"
             fullWidth={true}
@@ -54,19 +51,20 @@ export const Join = (props: JoinProps) => {
     )
   }
 
+  const { messages, sendMessage, getMessage, joined, disconnect, idSocket } = props;
+
   return (
     <div>
       {props.joined ? <Chat
         chatAuth={chatAuth}
-        messages={props.messages}
-        sendMessage={props.sendMessage}
-        getMessage={props.getMessage}
-        joined={props.joined}
-        disconnect={props.disconnect}
-        idSocket={props.idSocket}
+        messages={messages}
+        sendMessage={sendMessage}
+        getMessage={getMessage}
+        joined={joined}
+        disconnect={disconnect}
+        idSocket={idSocket}
       /> : joinForm()}
     </div>
-
   )
 };
 

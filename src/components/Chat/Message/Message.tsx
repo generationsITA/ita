@@ -11,10 +11,9 @@ interface Props {
   idSocket: string
 }
 
-const Message = (props: Props) => {
-
+const Message = (props: Props): JSX.Element => {
   return (
-    props.message.name === 'System' ? (
+    props.message.id === 'System' ? (
       <div className='system'>
         <System text={props.message.text} />
       </div>
