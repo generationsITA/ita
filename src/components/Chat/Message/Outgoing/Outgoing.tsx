@@ -1,8 +1,9 @@
 import React from 'react';
 import './Outgoing.css';
+import Emoji from 'react-emoji-render';
 
 interface Props {
-    name: string, 
+    name: string,
     text: string
 }
 
@@ -11,7 +12,7 @@ const Outgoing = (props: Props) => {
     return (
         <div className='outgoing-message-container'>
             <p className='outgoing-message-text'>
-                {text}
+                <Emoji text={text} />
             </p>
         </div>
     );
