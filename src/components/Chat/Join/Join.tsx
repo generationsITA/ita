@@ -41,7 +41,7 @@ export const Join = (props: JoinProps) => {
           </div>
           <Button
             variant="contained"
-            disabled={!name.trim() || name === 'System' || name === 'system' ? true : false}
+            disabled={!name.trim() ? true : false}
             color="primary"
             type="submit"
             fullWidth={true}
