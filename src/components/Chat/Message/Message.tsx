@@ -7,26 +7,24 @@ import System from './System/System';
 
 interface Props {
   message: ResponseMessage,
-  authName: string
+  authName: string,
+  idSocket: string
 }
 
 const Message = (props: Props) => {
 
-  const trimmedName = props.authName.trim().toLowerCase();
-
-  const { name, text } = props.message;
   return (
     props.message.name === 'System' ? (
       <div className='system'>
-        <System text={text} />
+        <System text={props.message.text} />
       </div>
-    ) : props.message.name === trimmedName ? (
+    ) : props.message.id === props.idSocket ? (
       <div className='outgoing'>
-        <Outgoing name={name} text={text} />
+        <Outgoing name={props.message.name} text={props.message.text} />
       </div>
     ) : (
           <div className='incoming'>
-            <Incoming name={name} text={text} />
+            <Incoming name={props.message.name} text={props.message.text} />
           </div>
         )
   )

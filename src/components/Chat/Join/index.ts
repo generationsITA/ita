@@ -12,13 +12,15 @@ export interface ChatAuth {
 
 export interface ResponseMessage {
     name: string,
-    text: string
+    text: string,
+    id: string
 }
 interface ConnectedProps {
     chatAuth: ChatAuth;
     message: ResponseMessage;
     messages: ResponseMessage[],
-    joined: boolean
+    joined: boolean,
+    idSocket: string
 }
 
 export type JoinProps = ConnectedProps &
@@ -29,7 +31,8 @@ const mapStateToProps = (state: { chatReducer: ChatState }): ConnectedProps => {
         chatAuth: state.chatReducer.chatAuth,
         message: state.chatReducer.message,
         messages: state.chatReducer.messages,
-        joined: state.chatReducer.joined
+        joined: state.chatReducer.joined,
+        idSocket: state.chatReducer.idSocket
     };
 };
 

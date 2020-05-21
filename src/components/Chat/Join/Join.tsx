@@ -15,9 +15,11 @@ export const Join = (props: JoinProps) => {
     room
   }
 
+
   const joinButtonClick = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     props.join(chatAuth);
+    console.log(chatAuth);
   }
 
   const joinForm = () => {
@@ -61,6 +63,7 @@ export const Join = (props: JoinProps) => {
         getMessage={props.getMessage}
         joined={props.joined}
         disconnect={props.disconnect}
+        idSocket={props.idSocket}
       /> : joinForm()}
     </div>
 

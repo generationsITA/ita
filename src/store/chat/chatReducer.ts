@@ -1,6 +1,6 @@
 import { chatActions } from './chatActions';
 import {
-    JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT
+    JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT, CURRENT_SOCKET_ID
 } from './chatConstants';
 import { ChatAuth, ResponseMessage } from '@components/Chat/Join';
 
@@ -8,7 +8,8 @@ export interface ChatState {
     chatAuth: ChatAuth,
     message: ResponseMessage,
     messages: ResponseMessage[],
-    joined: boolean
+    joined: boolean,
+    idSocket: string
 }
 
 const initialState: ChatState = {
@@ -18,9 +19,11 @@ const initialState: ChatState = {
     },
     message: {
         name: '',
-        text: ''
+        text: '',
+        id: ''
     },
     messages: [],
+    idSocket: '',
     joined: false
 }
 
@@ -32,11 +35,11 @@ export const chatReducer = (state = initialState, action: chatActions): ChatStat
                 chatAuth: action.payload,
                 joined: true
             }
-        // case JOINED:
-        //     return {
-        //         ...state,
-        //         joined: true
-        //     }
+        case JOINED:
+            return {
+                ...state,
+                joined: true
+            }
         case GET_MESSAGE:
             return {
                 ...state,
@@ -50,11 +53,12 @@ export const chatReducer = (state = initialState, action: chatActions): ChatStat
         case DISCONNECT:
             return {
                 ...state,
-                chatAuth: {
-                    name: '',
-                    room: ''
-                },
                 joined: false
+            }
+        case CURRENT_SOCKET_ID:
+            return {
+                ...state,
+                idSocket: action.payload
             }
         default:
             return state;

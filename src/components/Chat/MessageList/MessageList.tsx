@@ -6,7 +6,8 @@ import ScrollableFeed from 'react-scrollable-feed'
 
 interface Props {
     messages: ResponseMessage[],
-    authName: string
+    authName: string,
+    idSocket: string
 }
 
 const MessageList = (props: Props) => {
@@ -15,7 +16,11 @@ const MessageList = (props: Props) => {
             <ScrollableFeed forceScroll={true}>
                 {props.messages.map((message, index) => {
                     return (
-                        <Message key={index} message={message} authName={props.authName} />
+                        <Message key={index}
+                            message={message}
+                            authName={props.authName}
+                            idSocket={props.idSocket}
+                        />
                     )
                 })}
             </ScrollableFeed>

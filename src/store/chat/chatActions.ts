@@ -1,9 +1,9 @@
-import { JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT } from './chatConstants';
+import { JOIN, JOINED, GET_MESSAGE, SEND_MESSAGE, DISCONNECT, CURRENT_SOCKET_ID } from './chatConstants';
 import { ChatAuth, ResponseMessage } from '@components/Chat/Join';
 
 
 export interface JoinAction {
-    type: typeof JOIN;
+    type: typeof JOIN,
     payload: ChatAuth
 }
 
@@ -12,13 +12,23 @@ export const join = (payload: ChatAuth): JoinAction => ({
     payload
 })
 
-// export interface JoinedAction {
-//     type: typeof JOINED;
-// }
+export interface CurrentSocketIdAction {
+    type: typeof CURRENT_SOCKET_ID,
+    payload: string
+}
 
-// export const joined = (): JoinedAction => ({
-//     type: JOINED
-// })
+export const getCurrentSocketId = (payload: string) => ({
+    type: CURRENT_SOCKET_ID,
+    payload
+})
+
+export interface JoinedAction {
+    type: typeof JOINED;
+}
+
+export const joined = (): JoinedAction => ({
+    type: JOINED
+})
 
 export interface GetMessageAction {
     type: typeof GET_MESSAGE;
@@ -49,7 +59,8 @@ export const disconnect = (): DisconnectAction => ({
 })
 
 export type chatActions = JoinAction
-  //  | JoinedAction
+    | JoinedAction
     | GetMessageAction
     | SendMessageAction
-    | DisconnectAction;
+    | DisconnectAction
+    | CurrentSocketIdAction;

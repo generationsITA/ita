@@ -6,7 +6,8 @@ import { ResponseMessage } from '../Join';
 
 interface Props {
     authName: string,
-    sendMessage: (message: ResponseMessage) => void
+    sendMessage: (message: ResponseMessage) => void,
+    id: string
 }
 
 
@@ -14,7 +15,8 @@ class AddMessage extends Component<Props> {
 
     state = {
         name: this.props.authName,
-        text: ''
+        text: '',
+        id: this.props.id
     }
 
     handleInputChange = (event: { target: { value: string; }; }): void => {
