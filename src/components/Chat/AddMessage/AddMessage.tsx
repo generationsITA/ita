@@ -45,26 +45,6 @@ class AddMessage extends Component<Props> {
     render() {
         return (
             <div className='add-message-bar'>
-                {/* <TextField
-            label='Type a message...'
-            variant='outlined'
-            type='text'
-            onChange={(event) => setText(event.target.value)}
-            value={text}
-            fullWidth={true}
-            data-testid='add-message-input'
-            required
-            onKeyPress={event => event.key === 'Enter' ? onSendButton(event) : null}
-        />
-            <Button
-                className="submit"
-                variant="contained"
-                color="primary"
-                type="submit"
-                onClick={onSendButton}
-
-            >
-                */}
                 <TextField
                     label='Type a message...'
                     variant='outlined'
