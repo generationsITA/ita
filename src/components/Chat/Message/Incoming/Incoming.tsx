@@ -1,8 +1,9 @@
 import React from 'react';
 import './Incoming.css';
+import Emoji from 'react-emoji-render';
 
 interface Props {
-    name: string, 
+    name: string,
     text: string
 }
 
@@ -14,7 +15,7 @@ const Incoming = (props: Props) => {
                 {name}
             </h4>
             <p className='incoming-message-text'>
-                {text}
+                <Emoji text={text} />
             </p>
         </div>
     );

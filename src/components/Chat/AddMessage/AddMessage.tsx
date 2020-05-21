@@ -23,12 +23,6 @@ class AddMessage extends Component<Props> {
         })
     }
 
-    // const onSendButton = (event: any) => {
-    //     props.sendMessage(message);
-    //     this.setState({
-    //         text: ''
-    //     })
-    // }
     onSendButton = (): void => {
         this.props.sendMessage(this.state);
         console.log(this.state)
@@ -45,26 +39,6 @@ class AddMessage extends Component<Props> {
     render() {
         return (
             <div className='add-message-bar'>
-                {/* <TextField
-            label='Type a message...'
-            variant='outlined'
-            type='text'
-            onChange={(event) => setText(event.target.value)}
-            value={text}
-            fullWidth={true}
-            data-testid='add-message-input'
-            required
-            onKeyPress={event => event.key === 'Enter' ? onSendButton(event) : null}
-        />
-            <Button
-                className="submit"
-                variant="contained"
-                color="primary"
-                type="submit"
-                onClick={onSendButton}
-
-            >
-                */}
                 <TextField
                     label='Type a message...'
                     variant='outlined'
@@ -72,9 +46,9 @@ class AddMessage extends Component<Props> {
                     onChange={this.handleInputChange}
                     value={this.state.text}
                     fullWidth={true}
-                    multiline
-                    rows={2}
-                    rowsMax={2}
+                    // multiline
+                    // rows={2}
+                    // rowsMax={2}
                     data-testid='add-message-input'
                     onKeyPress={this.handleKeyPress}
                 />
