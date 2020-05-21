@@ -23,12 +23,6 @@ class AddMessage extends Component<Props> {
         })
     }
 
-    // const onSendButton = (event: any) => {
-    //     props.sendMessage(message);
-    //     this.setState({
-    //         text: ''
-    //     })
-    // }
     onSendButton = (): void => {
         this.props.sendMessage(this.state);
         console.log(this.state)
