@@ -1,9 +1,8 @@
-import React from 'react';
+// import React from 'react';
 import { connect } from 'react-redux';
 import { join, getMessage, sendMessage, disconnect } from '@store/chat/chatActions';
 import { ChatState } from '@store/chat/chatReducer';
 import { Join } from './Join';
-
 
 export interface ChatAuth {
     name: string,
@@ -12,24 +11,29 @@ export interface ChatAuth {
 
 export interface ResponseMessage {
     name: string,
-    text: string
+    text: string,
+    id: string
 }
+
 interface ConnectedProps {
     chatAuth: ChatAuth;
     message: ResponseMessage;
     messages: ResponseMessage[],
-    joined: boolean
+    joined: boolean,
+    idSocket: string
 }
 
 export type JoinProps = ConnectedProps &
     ReturnType<typeof mapDispatchToProps>;
 
 const mapStateToProps = (state: { chatReducer: ChatState }): ConnectedProps => {
+    const {chatAuth, message, messages, joined, idSocket } = state.chatReducer;
     return {
-        chatAuth: state.chatReducer.chatAuth,
-        message: state.chatReducer.message,
-        messages: state.chatReducer.messages,
-        joined: state.chatReducer.joined
+        chatAuth,
+        message,
+        messages,
+        joined,
+        idSocket
     };
 };
 

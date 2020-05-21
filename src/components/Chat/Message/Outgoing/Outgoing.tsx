@@ -7,7 +7,7 @@ interface Props {
     text: string
 }
 
-const Outgoing = (props: Props) => {
+const Outgoing = (props: Props): JSX.Element => {
     const { text } = props
     return (
         <div className='outgoing-message-container'>

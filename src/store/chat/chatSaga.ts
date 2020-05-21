@@ -1,5 +1,5 @@
-import { call, put, fork, take, takeEvery } from 'redux-saga/effects';
-import { getMessage, disconnect } from '../chat/chatActions'
+import { call, put, fork, take } from 'redux-saga/effects';
+import { getMessage, getCurrentSocketId } from '../chat/chatActions'
 import { JOIN, SEND_MESSAGE, DISCONNECT } from '../chat/chatConstants';
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
@@ -7,7 +7,7 @@ import { ResponseMessage } from '@components/Chat/Join';
 
 function connectSocket() {
     let socket: SocketIOClient.Socket;
-    //socket = io('http://localhost:5501');
+    //socket = io('http://localhost:5500');
     socket = io('https://ita-chat-app.herokuapp.com/');
     return socket;
 }
@@ -56,18 +56,20 @@ function* handleIO(socket: SocketIOClient.Socket) {
 export function* join(socket: SocketIOClient.Socket) {
     while (true) {
         const join = yield take(JOIN)
-        console.log(join.payload);
         socket.emit('join', join.payload, (error: string) => {
             if (error) {
                 console.log(error);
+                console.log(socket);
+            } else {
+                console.log(socket.id);
             }
         });
+        yield put(getCurrentSocketId(socket.id));
     };
 }
 
 export function* flow() {
-    const socket = yield call(connectSocket)
+    const socket = yield call(connectSocket);
     yield fork(join, socket);
-    //  yield put(joined());
     yield fork(handleIO, socket);
 }
