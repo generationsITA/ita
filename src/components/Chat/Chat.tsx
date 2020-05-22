@@ -15,7 +15,7 @@ interface Props {
   disconnect: () => void
 }
 
-const Chat = (props: Props) => {
+export const Chat = (props: Props) => {
 
   return (
     <div className='chat'>
@@ -31,5 +31,3 @@ const Chat = (props: Props) => {
     </div>
   );
 };
-
-export default Chat;

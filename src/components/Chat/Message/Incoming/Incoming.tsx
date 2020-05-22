@@ -7,7 +7,7 @@ interface Props {
     text: string
 }
 
-const Incoming = (props: Props): JSX.Element => {
+export const Incoming = (props: Props): JSX.Element => {
     const { name, text } = props
     return (
         <div className='incoming-message-container'>
@@ -20,5 +20,3 @@ const Incoming = (props: Props): JSX.Element => {
         </div>
     );
 };
-
-export default Incoming;

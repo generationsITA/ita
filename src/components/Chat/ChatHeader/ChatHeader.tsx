@@ -7,7 +7,7 @@ interface Props {
     disconnect: () => void
 }
 
-const ChatHeader = (props: Props) => {
+export const ChatHeader = (props: Props) => {
 
     const onClickHandler = (event: any) => {
         props.disconnect();
@@ -28,5 +28,3 @@ const ChatHeader = (props: Props) => {
         </div>
     );
 };
-
-export default ChatHeader;
