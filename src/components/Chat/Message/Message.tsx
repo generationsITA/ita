@@ -1,9 +1,9 @@
 import React from 'react';
 import './Message.css';
-import Outgoing from './Outgoing/Outgoing';
-import Incoming from './Incoming/Incoming';
+import Outgoing from './Outgoing';
+import Incoming from './Incoming';
 import { ResponseMessage } from '../Join';
-import System from './System/System';
+import System from './System';
 
 interface Props {
   message: ResponseMessage,
