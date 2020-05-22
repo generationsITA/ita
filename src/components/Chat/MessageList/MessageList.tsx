@@ -1,6 +1,6 @@
 import React from 'react';
 import './MessageList.css';
-import Message from '../Message/Message';
+import Message from '../Message';
 import { ResponseMessage } from '../Join';
 import ScrollableFeed from 'react-scrollable-feed'
 

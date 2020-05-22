@@ -1,8 +1,8 @@
 import React from 'react';
 import './Chat.css';
-import ChatHeader from './ChatHeader/ChatHeader';
-import MessageList from './MessageList/MessageList';
-import AddMessage from './AddMessage/AddMessage';
+import ChatHeader from './ChatHeader';
+import MessageList from './MessageList';
+import AddMessage from './AddMessage';
 import { ChatAuth, ResponseMessage } from './Join';
 
 interface Props {
