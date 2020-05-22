@@ -10,7 +10,7 @@ interface Props {
     id: string
 }
 
-class AddMessage extends Component<Props> {
+export class AddMessage extends Component<Props> {
 
     state: ResponseMessage = {
         name: this.props.authName,
@@ -64,5 +64,3 @@ class AddMessage extends Component<Props> {
         );
     }
 };
-
-export default AddMessage;

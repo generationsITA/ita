@@ -7,7 +7,7 @@ interface Props {
     text: string
 }
 
-const Outgoing = (props: Props): JSX.Element => {
+export const Outgoing = (props: Props): JSX.Element => {
     const { text } = props
     return (
         <div className='outgoing-message-container'>
@@ -17,5 +17,3 @@ const Outgoing = (props: Props): JSX.Element => {
         </div>
     );
 };
-
-export default Outgoing;

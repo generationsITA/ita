@@ -11,7 +11,7 @@ interface Props {
   idSocket: string
 }
 
-const Message = (props: Props): JSX.Element => {
+export const Message = (props: Props): JSX.Element => {
   return (
     props.message.id === 'System' ? (
       <div className='system'>
@@ -28,5 +28,3 @@ const Message = (props: Props): JSX.Element => {
         )
   )
 };
-
-export default Message;

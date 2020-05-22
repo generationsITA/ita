@@ -1,3 +1,3 @@
-import Outgoing from './Outgoing';
+import { Outgoing } from './Outgoing';
 
 export default Outgoing;

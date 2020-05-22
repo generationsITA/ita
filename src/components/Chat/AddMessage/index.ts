@@ -1,3 +1,3 @@
-import AddMessage from './AddMessage';
+import { AddMessage } from './AddMessage';
 
 export default AddMessage;
