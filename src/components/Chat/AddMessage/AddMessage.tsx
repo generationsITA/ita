@@ -33,9 +33,12 @@ export class AddMessage extends Component<Props> {
     }
 
     private handleKeyPress = (event: { key: string; }): void => {
-        if (event.key === 'Enter' && this.state.text) {
-            this.onSendButton()
+        if (this.state.text.trim()) {
+            if (event.key === 'Enter' && this.state.text) {
+                this.onSendButton()
+            }
         }
+
     }
     render() {
         return (

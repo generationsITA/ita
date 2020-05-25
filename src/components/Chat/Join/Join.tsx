@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './Join.css';
-import Chat from '..';
-import { JoinProps, ChatAuth } from './index';
+import Chat from '../index';
+import { JoinProps, ChatAuth } from '.';
 
 export const Join = (props: JoinProps): JSX.Element => {
   const [name, setName] = useState('');
