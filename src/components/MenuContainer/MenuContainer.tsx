@@ -27,7 +27,7 @@ const menuItems: ItemsInterface[] = [
       {
         name: 'schedule',
         icon: 'far fa-calendar-alt',
-        path: '/chicken'
+        path: '/shedule'
       },
       {
         name: 'randomizer',

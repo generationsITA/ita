@@ -8,8 +8,13 @@ import HomePage from "@pages/home-page/home.page";
 import ProfilePage from "@pages/profile-page/profile-page";
 import Auth from "@components/Auth/auth.component";
 
+<<<<<<< HEAD
 import Todo from "@components/Todo";
 import Join from "@components/Chat/Join";
+=======
+import Todo from "../../components/Todo/Todo";
+import Shedule from '../../components/Shedule/Shedule'
+>>>>>>> ed8c4aa... env fullCalendar
 
 const StyledContentWrapper = styled.div`
   width: 100%;
@@ -28,6 +33,7 @@ const ContentWrapper = (props: { id: string }) => {
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
+        <Route path="/tools/shedule" component={Shedule} />
         <Route path="/tools/random" component={Randomizer} />
         <Route path="/tools/todo" component={Todo} />
         <Route path="/tools/chat" component={Join} />
